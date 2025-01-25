@@ -82,11 +82,13 @@ function addComponentsByType(name, type) {
 }
 
 // Helper func to do what all components need
-function addComponent(name) {
+function addComponent(name, iType) {
     span = document.createElement('span')
     span.id = name
 
-    // TODO: Use this checkbox
+    const useCheck = document.createElement('input')
+    useCheck.type = 'checkbox'
+    span.appendChild(useCheck)
 
     const h3 = document.createElement('h3')
     h3.innerText = name + ': '
@@ -94,7 +96,7 @@ function addComponent(name) {
 
 
     const input = document.createElement('input')
-    input.type = 'text'
+    input.type = iType
     span.appendChild(input)
 
     return span
@@ -124,13 +126,16 @@ function generateCommand() {
         compArr = []
         for (let o = 0; o < rawComponents[i].children.length; o++) {
             compArr.push(getDataFromElement(rawComponents[i].children[o]))
-            if (compArr == 'pop')
+            if (compArr[compArr.length - 1] === 'pop')
                 compArr.pop()
         }
-        try {
-            components += window[rawComponents[i].id](compArr) + ','
-        } catch {
-            console.error('Components interpreter "' + rawComponents[i].id + '" does not exist')
+        if (compArr[0] === "true") { // If use this checkbox is on
+            compArr = compArr.splice(1)
+            try {
+                components += window[rawComponents[i].id](compArr) + ','
+            } catch {
+                console.error('Components interpreter "' + rawComponents[i].id + '" does not exist')
+            }
         }
     }
 

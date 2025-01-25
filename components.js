@@ -1,5 +1,5 @@
 function build_lore(components) {
-    let span = addComponent('lore')
+    let span = addComponent('lore', 'text')
 
     const loreItalics = document.createElement('input')
     loreItalics.type = 'checkbox'
@@ -37,18 +37,7 @@ function lore(arr) {
 }
 
 function build_map_color(components) {
-    span = document.createElement('span')
-    span.id = 'map_color'
-
-    // TODO: Use this checkbox
-
-    const h3 = document.createElement('h3')
-    h3.innerText = 'map_color: '
-    span.appendChild(h3)
-
-    const map_color = document.createElement('input')
-    map_color.type = 'color'
-    span.appendChild(map_color)
+    let span = addComponent('map_color', 'color')
 
     components.appendChild(span)
 }
@@ -61,7 +50,9 @@ function build_rarity(components) {
     span = document.createElement('span')
     span.id = 'rarity'
 
-    // TODO: Use this checkbox
+    const useCheck = document.createElement('input')
+    useCheck.type = 'checkbox'
+    span.appendChild(useCheck)
 
     const h3 = document.createElement('h3')
     h3.innerText = 'rarity: '
