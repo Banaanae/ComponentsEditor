@@ -109,7 +109,7 @@ function generateCommand() {
     for (let i = 0; i < rawComponents.length; i++) {
         for (let o = 0; o < rawComponents[i].children.length; o++) {
             compArr.push(getDataFromElement(rawComponents[i].children[o]))
-            if (compArr == 'pop')
+            if (compArr === 'pop')
                 compArr.pop()
         }
         components += window[rawComponents[i].id](compArr) + ','
@@ -124,7 +124,7 @@ function getDataFromElement(element) {
     const type = element.tagName.toLowerCase()
     switch (type) {
         case 'input': {
-            if (element.type == 'checkbox')
+            if (element.type === 'checkbox')
                 return element.checked.toString()
             return element.value
         }

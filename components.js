@@ -27,7 +27,9 @@ function lore(arr) {
                 break
             }
             case 2: { // Colour
-                component += ',color:' + arr[i] + '}\','
+                if (arr[i] !== "")
+                    component += ',color:' + arr[i]
+                component += '}\','
             }
         }
     }
