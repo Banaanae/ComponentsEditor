@@ -62,7 +62,6 @@ function designPage(item) {
 
     // TODO: custom
 
-    console.log(item)
 }
 
 function addComponentsByType(type) {
@@ -107,7 +106,6 @@ function addComponentsByType(type) {
 
 function generateCommand() {
     const componentsDiv = document.getElementById('components')
-    console.log(componentsDiv)
     const commandBox = document.getElementById('command')
     const item = document.getElementById('currItem').innerText
     let command = '/give @s ' + item // TODO: recipient
@@ -117,14 +115,10 @@ function generateCommand() {
     const rawComponents = componentsDiv.getElementsByTagName('span')
     for (let i = 0; i < rawComponents.length; i++) {
         for (let o = 0; o < rawComponents[i].children.length; o++) {
-            console.log(rawComponents[i].children[o])
-            console.log(getDataFromElement(rawComponents[i].children[o]))
             compArr.push(getDataFromElement(rawComponents[i].children[o]))
             if (compArr == 'pop')
                 compArr.pop()
         }
-        console.log(compArr)
-        console.log(rawComponents[i].id)
         components += window[rawComponents[i].id](compArr) + ','
     }
 
@@ -135,11 +129,8 @@ function generateCommand() {
 
 function getDataFromElement(element) {
     const type = element.tagName.toLowerCase()
-    console.log(element)
-    console.log(type)
     switch (type) {
         case 'input': {
-            console.log(element.value)
             if (element.type == 'checkbox')
                 return element.checked.toString()
             return element.value
