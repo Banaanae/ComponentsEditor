@@ -10,9 +10,9 @@ fetch('./itemList.json')
 
 function addEntries(itemList) {
     const ddlDiv = document.getElementById('ddl')
-    itemList.items.forEach(item => {
+    for (var item in itemList) {
         const btn = document.createElement('button')
-        btn.innerText = item.name
+        btn.innerText = itemList[item].name
         ddlDiv.appendChild(btn)
         btn.addEventListener('click', function () {
             document.querySelectorAll('#ddl > button').forEach(button => {
@@ -20,7 +20,7 @@ function addEntries(itemList) {
             })
             designPage(btn.innerText)
         })
-    });
+    };
 }
 
 document.getElementById('generate').addEventListener('click', generateCommand)
@@ -57,7 +57,8 @@ function designPage(item) {
     mainEdits.appendChild(mainTitle)
     main.appendChild(mainEdits)
 
-    addComponentsByType('block') // TODO: type
+    const type = ILJson[mainTitle.innerText.replace('minecraft:', '')].type
+    addComponentsByType(type)
     
 
     // TODO: custom
@@ -65,43 +66,35 @@ function designPage(item) {
 }
 
 function addComponentsByType(type) {
-    let span;
     const components = document.getElementById('components')
 
     // Step 1: Universal
-    addComponent('lore', false)
+    buildLore(components)
 
-    const loreItalics = document.createElement('input')
-    loreItalics.type = 'checkbox'
-    span.appendChild(loreItalics)
+    // Step 2: By type
 
-    const loreColour = document.createElement('input')
-    loreColour.type = 'text'
-    span.appendChild(loreColour)
-    // TODO: +/- Line
-    components.appendChild(span)
+    // Step 3: Custom
+}
 
-    // Helper func to do what all components need
-    function addComponent(name, append) {
-        span = document.createElement('span')
-        span.id = name
+// Helper func to do what all components need
+function addComponent(name, append) {
+    span = document.createElement('span')
+    span.id = name
 
-        // TODO: Use this checkbox
+    // TODO: Use this checkbox
 
-        const h3 = document.createElement('h3')
-        h3.innerText = name
-        h3.style.display = 'inline'
-        span.appendChild(h3)
+    const h3 = document.createElement('h3')
+    h3.innerText = name
+    h3.style.display = 'inline'
+    span.appendChild(h3)
 
 
-        const input = document.createElement('input')
-        input.type = 'text'
-        input.id = name
-        span.appendChild(input)
+    const input = document.createElement('input')
+    input.type = 'text'
+    input.id = name
+    span.appendChild(input)
 
-        if (append)
-            components.appendChild(span)
-    }
+    return span
 }
 
 function generateCommand() {
@@ -135,6 +128,6 @@ function getDataFromElement(element) {
                 return element.checked.toString()
             return element.value
         }
-        default: console.error('Unhandled param type: ' + type); return 'pop'
+        default: console.warn('Unhandled param type: ' + type); return 'pop'
     }
 }

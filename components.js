@@ -1,3 +1,17 @@
+function buildLore(components) {
+    let span = addComponent('lore', false)
+
+    const loreItalics = document.createElement('input')
+    loreItalics.type = 'checkbox'
+    span.appendChild(loreItalics)
+
+    const loreColour = document.createElement('input')
+    loreColour.type = 'text'
+    span.appendChild(loreColour)
+    // TODO: +/- Line
+    components.appendChild(span)
+}
+
 function lore(arr) {
     let component = "lore=[";
     for (let i = 0; i < arr.length; i++) {
