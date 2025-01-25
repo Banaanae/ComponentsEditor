@@ -48,7 +48,6 @@ function build_map_color(components) {
 
     const map_color = document.createElement('input')
     map_color.type = 'color'
-    map_color.id = 'map_color'
     span.appendChild(map_color)
 
     components.appendChild(span)
@@ -56,4 +55,23 @@ function build_map_color(components) {
 
 function map_color(arr) {
     return `map_color=${arr[0]}`
+}
+
+function build_rarity(components) {
+    span = document.createElement('span')
+    span.id = 'rarity'
+
+    // TODO: Use this checkbox
+
+    const h3 = document.createElement('h3')
+    h3.innerText = 'rarity: '
+    span.appendChild(h3)
+
+    span.appendChild(buildSelect(['Common', 'Uncommon', 'Rare', 'Epic']))
+
+    components.appendChild(span)
+}
+
+function rarity(arr) {
+    return `rarity=${arr[0].toLowerCase()}`
 }

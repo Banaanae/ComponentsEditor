@@ -71,6 +71,7 @@ function addComponentsByType(name, type) {
 
     // Step 1: Universal
     build_lore(components)
+    build_rarity(components)
 
     // Step 2: By type
 
@@ -94,10 +95,20 @@ function addComponent(name) {
 
     const input = document.createElement('input')
     input.type = 'text'
-    input.id = name
     span.appendChild(input)
 
     return span
+}
+
+function buildSelect(options) {
+    const select = document.createElement('select')
+    let option;
+    options.forEach(opt => {
+        option = document.createElement('option')
+        option.innerText = opt
+        select.appendChild(option)
+    })
+    return select
 }
 
 function generateCommand() {
@@ -116,8 +127,11 @@ function generateCommand() {
             if (compArr == 'pop')
                 compArr.pop()
         }
-        console.log(compArr)
-        components += window[rawComponents[i].id](compArr) + ','
+        try {
+            components += window[rawComponents[i].id](compArr) + ','
+        } catch {
+            console.error('Components interpreter "' + rawComponents[i].id + '" does not exist')
+        }
     }
 
     if (components !== '')
@@ -135,6 +149,7 @@ function getDataFromElement(element) {
                 return parseInt(element.value.replace('#', ''), 16)
             return element.value
         }
+        case 'select': return element.value
         default: console.warn('Unhandled param type: ' + type); return 'pop'
     }
 }

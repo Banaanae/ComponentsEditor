@@ -1,7 +1,12 @@
 {
+    "chest": {
+        "name": "minecraft:chest",
+        "type": "container",
+        "custom": []
+    },
     "dirt": {
         "name": "minecraft:dirt",
-       "type": "block",
+        "type": "block",
         "custom": []
     },
     "filled_map": {
