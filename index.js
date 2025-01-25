@@ -70,8 +70,9 @@ function addComponentsByType(name, type) {
     const components = document.getElementById('components')
 
     // Step 1: Universal
-    build_lore(components)
-    build_rarity(components)
+    universal.forEach(func => {
+        window['build_' + func](components)
+    });
 
     // Step 2: By type
 

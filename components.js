@@ -1,3 +1,15 @@
+const universal = ['item_model', 'lore', 'rarity'];
+
+function build_item_model(components) {
+    let span = addComponent('item_model', 'text')
+
+    components.appendChild(span)
+}
+
+function item_model(arr) {
+    return `item_model="${arr[0]}"`
+}
+
 function build_lore(components) {
     let span = addComponent('lore', 'text')
 
