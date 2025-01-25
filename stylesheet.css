@@ -24,3 +24,11 @@
 #ddl > button:active {
     background-color: #e0e0e0;
 }
+
+#components > span > h3 {
+    display: inline;
+}
+
+#components > span {
+    display: block;
+}

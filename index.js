@@ -57,35 +57,38 @@ function designPage(item) {
     mainEdits.appendChild(mainTitle)
     main.appendChild(mainEdits)
 
-    const type = ILJson[mainTitle.innerText.replace('minecraft:', '')].type
-    addComponentsByType(type)
+    const name = mainTitle.innerText.replace('minecraft:', '')
+    const type = ILJson[name].type
+    addComponentsByType(name, type)
     
 
     // TODO: custom
 
 }
 
-function addComponentsByType(type) {
+function addComponentsByType(name, type) {
     const components = document.getElementById('components')
 
     // Step 1: Universal
-    buildLore(components)
+    build_lore(components)
 
     // Step 2: By type
 
     // Step 3: Custom
+    ILJson[name].custom.forEach(func => {
+        window['build_' + func](components)
+    });
 }
 
 // Helper func to do what all components need
-function addComponent(name, append) {
+function addComponent(name) {
     span = document.createElement('span')
     span.id = name
 
     // TODO: Use this checkbox
 
     const h3 = document.createElement('h3')
-    h3.innerText = name
-    h3.style.display = 'inline'
+    h3.innerText = name + ': '
     span.appendChild(h3)
 
 
@@ -104,14 +107,16 @@ function generateCommand() {
     let command = '/give @s ' + item // TODO: recipient
     let components = ''
 
-    const compArr = []
+    let compArr;
     const rawComponents = componentsDiv.getElementsByTagName('span')
     for (let i = 0; i < rawComponents.length; i++) {
+        compArr = []
         for (let o = 0; o < rawComponents[i].children.length; o++) {
             compArr.push(getDataFromElement(rawComponents[i].children[o]))
-            if (compArr === 'pop')
+            if (compArr == 'pop')
                 compArr.pop()
         }
+        console.log(compArr)
         components += window[rawComponents[i].id](compArr) + ','
     }
 
@@ -126,6 +131,8 @@ function getDataFromElement(element) {
         case 'input': {
             if (element.type === 'checkbox')
                 return element.checked.toString()
+            else if (element.type === 'color')
+                return parseInt(element.value.replace('#', ''), 16)
             return element.value
         }
         default: console.warn('Unhandled param type: ' + type); return 'pop'
