@@ -1,0 +1,26 @@
+#ddl {
+    width: 250px;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+#ddl > * {
+    width: 250px;
+    margin: 0;
+}
+
+#ddl > button {
+    display: none;
+    padding: 5px 0 5px 0;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#ddl > button:hover {
+    background-color: #f0f0f0;
+}
+
+#ddl > button:active {
+    background-color: #e0e0e0;
+}

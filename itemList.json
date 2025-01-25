@@ -1,0 +1,16 @@
+{
+    "items": [
+        {
+            "name": "minecraft:dirt",
+            "type": "block",
+            "custom": []
+        },
+        {
+            "name": "minecraft:filled_map",
+            "type": "item",
+            "custom": [
+                "map_color"
+            ]
+        }
+    ]
+}
