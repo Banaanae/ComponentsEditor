@@ -1,4 +1,42 @@
-const universal = ['item_model', 'lore', 'rarity'];
+const universal = ['custom_name', 'damage', 'item_model', 'lore', 'rarity'];
+
+function build_custom_name(components) {
+    let span = addComponent('custom_name', 'text')
+    
+    const nameColour = document.createElement('input')
+    nameColour.type = 'text'
+    span.appendChild(nameColour)
+
+    const nameItalics = document.createElement('input')
+    nameItalics.type = 'checkbox'
+    span.appendChild(nameItalics)
+
+    components.appendChild(span)
+}
+
+function custom_name(arr) {
+    let component = "custom_name=";
+    component += '\'{text:"' + arr[0] + '"'
+    
+    if (arr[1] !== "")
+        component += ',color:"' + arr[1] + '"'
+    
+    if (arr[2] !== 'true')
+        component += ',italic:false'
+    component += '}\''
+
+    return component
+}
+
+function build_damage(components) {
+    let span = addComponent('damage', 'number')
+
+    components.appendChild(span)
+}
+
+function damage(arr) {
+    return `damage=${arr[0]}`
+}
 
 function build_item_model(components) {
     let span = addComponent('item_model', 'text')

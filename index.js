@@ -135,7 +135,10 @@ function generateCommand() {
             try {
                 components += window[rawComponents[i].id](compArr) + ','
             } catch {
-                console.error('Components interpreter "' + rawComponents[i].id + '" does not exist')
+                if (window.hasOwnProperty(rawComponents[i].id))
+                    window[rawComponents[i].id](compArr) // Log error normally
+                else
+                    console.error('Components interpreter "' + rawComponents[i].id + '" does not exist')
             }
         }
     }
