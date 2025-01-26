@@ -1,4 +1,4 @@
-const universal = ['custom_name', 'damage', 'item_model', 'lore', 'max_damage', 'max_stack_size', 'rarity'];
+const universal = ['custom_name', 'damage', 'item_model', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
 
 function build_custom_name(components) {
     let span = addComponent('custom_name', 'text')
@@ -190,4 +190,16 @@ function recipes(arr) {
     });
 
     return component.replace(/,$/, ']')
+}
+
+function build_unbreakable(components) {
+    let span = addComponent('unbreakable', '') // TODO: Remove ": "
+
+    components.appendChild(span)
+}
+
+function unbreakable(arr) {
+    if (arr[0] === 'true')
+        return 'unbreakable={}'
+    return ''
 }

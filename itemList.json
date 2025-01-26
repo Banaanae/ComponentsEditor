@@ -23,5 +23,10 @@
         "custom": [
             "recipes"
         ]
+    },
+    "wooden_hoe": {
+        "name": "minecraft:wooden_hoe",
+        "type": "tool",
+        "custom": []
     }
 }

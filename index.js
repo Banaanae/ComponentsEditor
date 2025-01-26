@@ -101,10 +101,11 @@ function addComponent(name, iType) {
     h3.innerHTML += ': '
     span.appendChild(h3)
 
-
-    const input = document.createElement('input')
-    input.type = iType
-    span.appendChild(input)
+    if (iType !== '') {
+        const input = document.createElement('input')
+        input.type = iType
+        span.appendChild(input)
+    }
 
     return span
 }
@@ -136,8 +137,9 @@ function generateCommand() {
             if (compArr[compArr.length - 1] === 'pop')
                 compArr.pop()
         }
-        if (compArr[0] === "true") { // If use this checkbox is on
-            compArr = compArr.splice(1)
+        if (compArr[0] === "true" || compArr.length === 1) { // If use this checkbox is on
+            if (compArr.length !== 1)
+                compArr = compArr.splice(1)
             try {
                 components += window[rawComponents[i].id](compArr) + ','
             } catch {
