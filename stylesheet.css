@@ -29,6 +29,11 @@
     display: inline;
 }
 
+#components > span > h3 > a {
+    text-decoration: none;
+    color: black;
+}
+
 #components > span {
     display: block;
 }

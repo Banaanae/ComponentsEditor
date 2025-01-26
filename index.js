@@ -92,7 +92,11 @@ function addComponent(name, iType) {
     span.appendChild(useCheck)
 
     const h3 = document.createElement('h3')
-    h3.innerText = name + ': '
+    const a = document.createElement('a')
+    a.href = 'https://minecraft.wiki/w/Data_component_format#' + name
+    a.innerText = name
+    h3.appendChild(a)
+    h3.innerHTML += ': '
     span.appendChild(h3)
 
 
