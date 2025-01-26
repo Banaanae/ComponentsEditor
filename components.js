@@ -1,4 +1,4 @@
-const universal = ['custom_name', 'damage', 'item_model', 'lore', 'rarity'];
+const universal = ['custom_name', 'damage', 'item_model', 'lore', 'max_damage', 'max_stack_size', 'rarity'];
 
 function build_custom_name(components) {
     let span = addComponent('custom_name', 'text')
@@ -94,6 +94,36 @@ function build_map_color(components) {
 
 function map_color(arr) {
     return `map_color=${arr[0]}`
+}
+
+function build_map_id(components) {
+    let span = addComponent('map_id', 'number')
+
+    components.appendChild(span)
+}
+
+function map_id(arr) {
+    return `map_id=${arr[0]}`
+}
+
+function build_max_damage(components) {
+    let span = addComponent('max_damage', 'number')
+
+    components.appendChild(span)
+}
+
+function max_damage(arr) {
+    return `max_damage=${arr[0]}`
+}
+
+function build_max_stack_size(components) {
+    let span = addComponent('max_stack_size', 'number')
+
+    components.appendChild(span)
+}
+
+function max_stack_size(arr) {
+    return `max_stack_size=${arr[0]}`
 }
 
 function build_rarity(components) {

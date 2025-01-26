@@ -13,7 +13,8 @@
         "name": "minecraft:filled_map",
         "type": "item",
         "custom": [
-            "map_color"
+            "map_color",
+            "map_id"
         ]
     }
 }
