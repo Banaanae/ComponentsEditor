@@ -5,7 +5,6 @@ fetch('./itemList.json')
     .then(fileContents => {
         ILJson = JSON.parse(fileContents)
         addEntries(ILJson)
-        filterFunction()
     })
 
 function addEntries(itemList) {
@@ -24,7 +23,10 @@ function addEntries(itemList) {
 }
 
 document.getElementById('generate').addEventListener('click', generateCommand)
-document.getElementById('searchInput').addEventListener('click', filterFunction)
+const sInput = document.getElementById('searchInput')
+sInput.addEventListener('click', filterFunction)
+sInput.addEventListener('keyup', filterFunction)
+sInput.addEventListener('paste', filterFunction)
 
 // Modified from https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
 function filterFunction() {
@@ -35,7 +37,7 @@ function filterFunction() {
     for (let i = 0; i < btn.length; i++) {
         txtValue = btn[i].textContent || btn[i].innerText;
         txtValue = txtValue.replace("minecraft:", '')
-        if (txtValue.toUpperCase().indexOf(filter) > -1 && filter !== "") {
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
             btn[i].style.display = "block";
         } else {
             btn[i].style.display = "none";
