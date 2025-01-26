@@ -34,11 +34,11 @@
     display: none;
 }
 
-#components > span > h3 {
+#components span > h3 {
     display: inline;
 }
 
-#components > span > h3 > a {
+#components span > h3 > a {
     text-decoration: none;
     color: black;
 }

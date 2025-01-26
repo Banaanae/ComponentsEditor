@@ -16,5 +16,12 @@
             "map_color",
             "map_id"
         ]
+    },
+    "knowledge_book": {
+        "name": "minecraft:knowledge_book",
+        "type": "item",
+        "custom": [
+            "recipes"
+        ]
     }
 }

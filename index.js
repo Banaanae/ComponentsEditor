@@ -132,7 +132,7 @@ function generateCommand() {
     for (let i = 0; i < rawComponents.length; i++) {
         compArr = []
         for (let o = 0; o < rawComponents[i].children.length; o++) {
-            compArr.push(getDataFromElement(rawComponents[i].children[o]))
+            compArr = compArr.concat(getDataFromElement(rawComponents[i].children[o]))
             if (compArr[compArr.length - 1] === 'pop')
                 compArr.pop()
         }
@@ -169,6 +169,17 @@ function getDataFromElement(element) {
             return element.value
         }
         case 'select': return element.value
+        case 'span': return spanToArr(element)
         default: console.warn('Unhandled param type: ' + type); return 'pop'
     }
+}
+
+function spanToArr(span) {
+    let spanArr = []
+    for (let i = 0; i < span.children.length; i++) {
+        spanArr.push(getDataFromElement(span.children[i]))
+        if (spanArr[spanArr.length - 1] === 'pop')
+            spanArr.pop()
+    }
+    return spanArr
 }

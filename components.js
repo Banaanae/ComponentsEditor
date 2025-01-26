@@ -127,7 +127,7 @@ function max_stack_size(arr) {
 }
 
 function build_rarity(components) {
-    span = document.createElement('span')
+    let span = document.createElement('span')
     span.id = 'rarity'
 
     const useCheck = document.createElement('input')
@@ -149,4 +149,45 @@ function build_rarity(components) {
 
 function rarity(arr) {
     return `rarity=${arr[0].toLowerCase()}`
+}
+
+function build_recipes(components) {
+    let span = addComponent('recipes', 'text')
+    span.id = ''
+
+    let wrapper = document.createElement('span')
+    wrapper.appendChild(span)
+    wrapper.id = 'recipes'
+
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        let input = document.createElement('input')
+        input.text = 'text'
+        span.appendChild(input)
+    })
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        document.querySelector('#recipes > span > input:last-child').remove()
+    })
+
+    wrapper.appendChild(span)
+    wrapper.appendChild(pBtn)
+    wrapper.appendChild(mBtn)
+
+    components.appendChild(wrapper)
+}
+
+function recipes(arr) {
+    if (arr.length === 0)
+        return ""
+
+    let component = 'recipes=['
+    arr.forEach(recipe => {
+        component += '"' + recipe + '",'
+    });
+
+    return component.replace(/,$/, ']')
 }
