@@ -1,4 +1,4 @@
-const universal = ['custom_name', 'damage', 'glider', 'item_model', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
+const universal = ['custom_name', 'damage', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
 
 function build_custom_name(components) {
     let span = addComponent('custom_name', 'text')
@@ -58,6 +58,16 @@ function build_item_model(components) {
 
 function item_model(arr) {
     return `item_model="${arr[0]}"`
+}
+
+function build_jukebox_playable(components) {
+    let span = addComponent('jukebox_playable', 'text')
+
+    components.appendChild(span)
+}
+
+function jukebox_playable(arr) {
+    return `jukebox_playable="${arr[0]}"`
 }
 
 function build_lore(components) {
