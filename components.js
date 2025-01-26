@@ -1,4 +1,4 @@
-const universal = ['custom_name', 'damage', 'item_model', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
+const universal = ['custom_name', 'damage', 'glider', 'item_model', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
 
 function build_custom_name(components) {
     let span = addComponent('custom_name', 'text')
@@ -36,6 +36,18 @@ function build_damage(components) {
 
 function damage(arr) {
     return `damage=${arr[0]}`
+}
+
+function build_glider(components) {
+    let span = addComponent('glider', '') // TODO: Remove ": "
+
+    components.appendChild(span)
+}
+
+function glider(arr) {
+    if (arr[0] === 'true')
+        return 'glider={}'
+    return ''
 }
 
 function build_item_model(components) {

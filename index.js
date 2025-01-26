@@ -129,6 +129,7 @@ function generateCommand() {
     let components = ''
 
     let compArr;
+    let data;
     const rawComponents = componentsDiv.getElementsByTagName('span')
     for (let i = 0; i < rawComponents.length; i++) {
         compArr = []
@@ -141,7 +142,9 @@ function generateCommand() {
             if (compArr.length !== 1)
                 compArr = compArr.splice(1)
             try {
-                components += window[rawComponents[i].id](compArr) + ','
+                data = window[rawComponents[i].id](compArr)
+                if (data !== '')
+                    components += data + ','
             } catch {
                 if (window.hasOwnProperty(rawComponents[i].id))
                     window[rawComponents[i].id](compArr) // Log error normally
@@ -153,7 +156,7 @@ function generateCommand() {
 
     if (components !== '')
         components = '[' + components + ']'
-    commandBox.value = command + components.replace(/,\]$/, ']')
+    commandBox.value = command + components.replace(/,+\]$/, ']')
     if (commandBox.value.length > 256) // TODO: Make this event listener
         document.querySelector('.Warning256').style.display = 'inline'
     else
