@@ -148,6 +148,19 @@ function max_stack_size(arr) {
     return `max_stack_size=${arr[0]}`
 }
 
+function build_ominous_bottle_amplifier(components) {
+    let span = addComponent('ominous_bottle_amplifier', 'number')
+
+    span.children[2].min = 0
+    span.children[2].max = 4
+
+    components.appendChild(span)
+}
+
+function ominous_bottle_amplifier(arr) {
+    return `ominous_bottle_amplifier=${arr[0]}`
+}
+
 function build_rarity(components) {
     let span = document.createElement('span')
     span.id = 'rarity'

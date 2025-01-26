@@ -24,6 +24,13 @@
             "recipes"
         ]
     },
+    "ominous_bottle": {
+        "name": "minecraft:ominous_bottle",
+        "type": "item",
+        "custom": [
+            "ominous_bottle_amplifier"
+        ]
+    },
     "wooden_hoe": {
         "name": "minecraft:wooden_hoe",
         "type": "tool",
