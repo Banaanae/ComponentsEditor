@@ -152,6 +152,10 @@ function generateCommand() {
     if (components !== '')
         components = '[' + components + ']'
     commandBox.value = command + components.replace(/,\]$/, ']')
+    if (commandBox.value.length > 256) // TODO: Make this event listener
+        document.querySelector('.Warning256').style.display = 'inline'
+    else
+        document.querySelector('.Warning256').style.display = 'none'
 }
 
 function getDataFromElement(element) {

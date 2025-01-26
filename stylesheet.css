@@ -25,6 +25,15 @@
     background-color: #e0e0e0;
 }
 
+#command {
+    width: 25%;
+    min-width: 200px;
+}
+
+.Warning256 {
+    display: none;
+}
+
 #components > span > h3 {
     display: inline;
 }
