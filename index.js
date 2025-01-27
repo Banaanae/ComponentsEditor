@@ -110,7 +110,7 @@ function addComponent(name, iType) {
     return span
 }
 
-function buildSelect(options) {
+function buildSelect(options, multiple = false) {
     const select = document.createElement('select')
     let option;
     options.forEach(opt => {
@@ -118,6 +118,8 @@ function buildSelect(options) {
         option.innerText = opt
         select.appendChild(option)
     })
+    if (multiple)
+        select.multiple = multiple
     return select
 }
 
@@ -168,7 +170,16 @@ function getDataFromElement(element) {
                 return parseInt(element.value.replace('#', ''), 16)
             return element.value
         }
-        case 'select': return element.value
+        case 'select': {
+            if (element.type === 'select-multiple') {
+                let result = {} // Use object so concat doesn't merge
+                for (let i = 0; i < element.length; i++) {
+                    result[element[i].value] = element[i].selected
+                }
+                return result
+            }
+            return element.value
+        }
         case 'span': return spanToArr(element)
         default: console.warn('Unhandled param type: ' + type); return 'pop'
     }
@@ -177,7 +188,7 @@ function getDataFromElement(element) {
 function spanToArr(span) {
     let spanArr = []
     for (let i = 0; i < span.children.length; i++) {
-        spanArr.push(getDataFromElement(span.children[i]))
+        spanArr = spanArr.concat(getDataFromElement(span.children[i]))
         if (spanArr[spanArr.length - 1] === 'pop')
             spanArr.pop()
     }
