@@ -132,12 +132,7 @@ function generateCommand() {
     let data;
     const rawComponents = componentsDiv.getElementsByTagName('span')
     for (let i = 0; i < rawComponents.length; i++) {
-        compArr = []
-        for (let o = 0; o < rawComponents[i].children.length; o++) {
-            compArr = compArr.concat(getDataFromElement(rawComponents[i].children[o]))
-            if (compArr[compArr.length - 1] === 'pop')
-                compArr.pop()
-        }
+        compArr = spanToArr(rawComponents[i])
         if (compArr[0] === "true" || compArr.length === 1) { // If use this checkbox is on
             if (compArr.length !== 1)
                 compArr = compArr.splice(1)
