@@ -145,6 +145,7 @@ function generateCommand() {
             } catch {
                 if (window.hasOwnProperty(rawComponents[i].id))
                     window[rawComponents[i].id](compArr) // Log error normally
+                else if (rawComponents[i].id === "") {} // Sub-span (skip)
                 else
                     console.error('Components interpreter "' + rawComponents[i].id + '" does not exist')
             }
