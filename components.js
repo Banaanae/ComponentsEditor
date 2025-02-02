@@ -1,4 +1,14 @@
-const universal = ['custom_name', 'damage', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
+const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
+
+function build_break_sound(components) {
+    let span = addComponent('break_sound', 'text')
+
+    components.appendChild(span)
+}
+
+function break_sound(arr) {
+    return `break_sound="${arr[0]}"`
+}
 
 function build_consumable(components) {
     let span = addComponent('consumable', 'number')
