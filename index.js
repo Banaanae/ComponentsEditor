@@ -96,20 +96,26 @@ function addComponent(name, iType) {
     const summary = document.createElement('summary')
     summary.innerText = name
     span.appendChild(summary)
-
-    const useCheck = document.createElement('input')
-    useCheck.type = 'checkbox'
-    span.appendChild(useCheck)
-
-    const h3 = document.createElement('h3')
+    
+    const p = document.createElement('p')
+    p.innerHTML = 'minecraft.wiki reference: '
     const a = document.createElement('a')
     a.href = 'https://minecraft.wiki/w/Data_component_format#' + name
     a.innerText = name
-    h3.appendChild(a)
-    h3.innerHTML += ': '
-    span.appendChild(h3)
+    p.appendChild(a)
+    span.appendChild(p)
+    
+    const useCheck = document.createElement('input')
+    useCheck.type = 'checkbox'
+    useCheck.id = name + '_ac'
+    span.appendChild(useCheck)
+    
+    const activeLabel = document.createElement('label')
+    activeLabel.innerText = 'Active'
+    activeLabel.for = useCheck.id
+    span.appendChild(activeLabel)
 
-    if (iType !== '') {
+    if (iType !== 'none') {
         const input = document.createElement('input')
         input.type = iType
         span.appendChild(input)

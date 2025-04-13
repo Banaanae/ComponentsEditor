@@ -190,7 +190,7 @@ function food(arr) {
 }
 
 function build_glider() {
-    let span = addComponent('glider', '') // TODO: Remove ": "
+    let span = addComponent('glider', 'none')
 
     return span
 }
@@ -313,24 +313,7 @@ function ominous_bottle_amplifier(arr) {
 }
 
 function build_rarity() {
-    let span = document.createElement('details')
-    span.id = 'rarity'
-
-    const summary = document.createElement('summary')
-    summary.innerText = 'rarity'
-    span.appendChild(summary)
-
-    const useCheck = document.createElement('input')
-    useCheck.type = 'checkbox'
-    span.appendChild(useCheck)
-
-    const h3 = document.createElement('h3')
-    const a = document.createElement('a')
-    a.href = 'https://minecraft.wiki/w/Data_component_format#rarity'
-    a.innerText = 'rarity'
-    h3.appendChild(a)
-    h3.innerHTML += ': '
-    span.appendChild(h3)
+    let span = addComponent('rarity', 'none')
 
     span.appendChild(buildSelect(['Common', 'Uncommon', 'Rare', 'Epic']))
 
@@ -383,7 +366,7 @@ function recipes(arr) {
 }
 
 function build_unbreakable() {
-    let span = addComponent('unbreakable', '') // TODO: Remove ": "
+    let span = addComponent('unbreakable', 'none')
 
     return span
 }
