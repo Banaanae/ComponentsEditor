@@ -64,15 +64,14 @@ function designPage(item) {
     main.appendChild(mainEdits)
 
     const name = mainTitle.innerText.replace('minecraft:', '')
-    const type = ILJson[name].type
-    addComponentsByType(name, type)
+    addComponentsBuilders(name)
     
 
     // TODO: custom
 
 }
 
-function addComponentsByType(name, type) {
+function addComponentsByType(name) {
     const editWin = document.querySelector('.edit')
 
     // Step 1: Universal
@@ -80,9 +79,7 @@ function addComponentsByType(name, type) {
         editWin.appendChild(window['build_' + func]())
     });
 
-    // Step 2: By type
-
-    // Step 3: Custom
+    // Step 2: Custom
     ILJson[name].custom.forEach(func => {
         editWin.appendChild(window['build_' + func]())
     });

@@ -1,17 +1,14 @@
 {
     "chest": {
         "name": "minecraft:chest",
-        "type": "container",
         "custom": []
     },
     "dirt": {
         "name": "minecraft:dirt",
-        "type": "block",
         "custom": []
     },
     "filled_map": {
         "name": "minecraft:filled_map",
-        "type": "item",
         "custom": [
             "map_color",
             "map_id"
@@ -19,21 +16,18 @@
     },
     "knowledge_book": {
         "name": "minecraft:knowledge_book",
-        "type": "item",
         "custom": [
             "recipes"
         ]
     },
     "ominous_bottle": {
         "name": "minecraft:ominous_bottle",
-        "type": "item",
         "custom": [
             "ominous_bottle_amplifier"
         ]
     },
     "wooden_hoe": {
         "name": "minecraft:wooden_hoe",
-        "type": "tool",
         "custom": []
     }
 }

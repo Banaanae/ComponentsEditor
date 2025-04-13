@@ -47,15 +47,11 @@
     display: none;
 }
 
-.edit details > h3 {
-    display: inline;
-}
-
-.edit details > h3 > a {
-    text-decoration: none;
-    color: black;
-}
-
 .edit > details {
     display: block;
+}
+
+
+.edit > details > p {
+    display: block
 }
