@@ -50,6 +50,7 @@ function filterFunction() {
 
 function designPage(item) {
     const main = document.getElementById('editor')
+    document.querySelector('.edit').innerHTML = ''
     main.removeChild(document.getElementById('components'))
 
     const mainEdits = document.createElement('div')
@@ -72,7 +73,6 @@ function designPage(item) {
 }
 
 function addComponentsByType(name, type) {
-    const components = document.getElementById('components')
     const editWin = document.querySelector('.edit')
 
     // Step 1: Universal

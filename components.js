@@ -303,32 +303,39 @@ function rarity(arr) {
 }
 
 function build_recipes() {
-    let span = addComponent('recipes', ['recipes', 'text'])
-    span.id = ''
+    let span = addComponent('recipes', [])
 
     let wrapper = document.createElement('span')
-    wrapper.appendChild(span)
-    wrapper.id = 'recipes'
+
+    wrapper.appendChild(document.createElement('br'))
+    const inputName = document.createElement('span')
+    inputName.innerText = 'recipes: '
+    wrapper.appendChild(inputName)
+    
+    const input = document.createElement('input')
+    input.type = 'text'
+    wrapper.appendChild(input)
 
     let pBtn = document.createElement('button')
     pBtn.innerText = '+'
     pBtn.addEventListener('click', function () {
         let input = document.createElement('input')
         input.text = 'text'
-        span.appendChild(input)
+        wrapper.appendChild(input)
     })
 
     let mBtn = document.createElement('button')
     mBtn.innerText = '-'
     mBtn.addEventListener('click', function () {
-        document.querySelector('#recipes > span > input:last-child').remove()
+        if (document.querySelectorAll('#recipes > span > input').length !== 1)
+            document.querySelector('#recipes > span > input:last-child').remove()
     })
+    
+    span.appendChild(wrapper)
+    span.appendChild(pBtn)
+    span.appendChild(mBtn)
 
-    wrapper.appendChild(span)
-    wrapper.appendChild(pBtn)
-    wrapper.appendChild(mBtn)
-
-    return wrapper
+    return span
 }
 
 function recipes(arr) {
