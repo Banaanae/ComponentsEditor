@@ -1,5 +1,8 @@
 let ILJson;
 
+if (localStorage.length === 0)
+    localStorage.commandArgs = []
+
 fetch('./itemList.json')
     .then(response => response.text())
     .then(fileContents => {
@@ -70,24 +73,29 @@ function designPage(item) {
 
 function addComponentsByType(name, type) {
     const components = document.getElementById('components')
+    const editWin = document.querySelector('.edit')
 
     // Step 1: Universal
     universal.forEach(func => {
-        window['build_' + func](components)
+        editWin.appendChild(window['build_' + func]())
     });
 
     // Step 2: By type
 
     // Step 3: Custom
     ILJson[name].custom.forEach(func => {
-        window['build_' + func](components)
+        editWin.appendChild(window['build_' + func]())
     });
 }
 
 // Helper func to do what all components need
 function addComponent(name, iType) {
-    span = document.createElement('span')
+    let span = document.createElement('details')
     span.id = name
+
+    const summary = document.createElement('summary')
+    summary.innerText = name
+    span.appendChild(summary)
 
     const useCheck = document.createElement('input')
     useCheck.type = 'checkbox'
@@ -124,7 +132,7 @@ function buildSelect(options, multiple = false) {
 }
 
 function generateCommand() {
-    const componentsDiv = document.getElementById('components')
+    const componentsDiv = document.querySelector('.edit')
     const commandBox = document.getElementById('command')
     const item = document.getElementById('currItem').innerText
     let command = '/give @s ' + item // TODO: recipient
@@ -132,7 +140,7 @@ function generateCommand() {
 
     let compArr;
     let data;
-    const rawComponents = componentsDiv.getElementsByTagName('span')
+    const rawComponents = componentsDiv.getElementsByTagName('details')
     for (let i = 0; i < rawComponents.length; i++) {
         compArr = spanToArr(rawComponents[i])
         if (compArr[0] === "true" || compArr.length === 1) { // If use this checkbox is on

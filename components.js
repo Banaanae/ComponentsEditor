@@ -1,16 +1,16 @@
 const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
 
-function build_break_sound(components) {
+function build_break_sound() {
     let span = addComponent('break_sound', 'text')
 
-    components.appendChild(span)
+    return span
 }
 
 function break_sound(arr) {
     return `break_sound="${arr[0]}"`
 }
 
-function build_consumable(components) {
+function build_consumable() {
     let span = addComponent('consumable', 'number')
 
     span.children[2].step = 0.1
@@ -86,7 +86,7 @@ function build_consumable(components) {
         }
     })
 
-    components.appendChild(span)
+    return span
 }
 
 function consumable(arr) {
@@ -128,7 +128,7 @@ function consumable(arr) {
     return component.replace(/,$/, '}]')
 }
 
-function build_custom_name(components) {
+function build_custom_name() {
     let span = addComponent('custom_name', 'text')
     
     const nameColour = document.createElement('input')
@@ -139,7 +139,7 @@ function build_custom_name(components) {
     nameItalics.type = 'checkbox'
     span.appendChild(nameItalics)
 
-    components.appendChild(span)
+    return span
 }
 
 function custom_name(arr) {
@@ -156,17 +156,17 @@ function custom_name(arr) {
     return component
 }
 
-function build_damage(components) {
+function build_damage() {
     let span = addComponent('damage', 'number')
 
-    components.appendChild(span)
+    return span
 }
 
 function damage(arr) {
     return `damage=${arr[0]}`
 }
 
-function build_food(components) {
+function build_food() {
     let span = addComponent('food', 'number')
 
     let saturation = document.createElement('input')
@@ -178,7 +178,7 @@ function build_food(components) {
     can_always_eat.type = 'checkbox'
     span.appendChild(can_always_eat)
 
-    components.appendChild(span)
+    return span
 }
 
 function food(arr) {
@@ -189,10 +189,10 @@ function food(arr) {
     return component + '}'
 }
 
-function build_glider(components) {
+function build_glider() {
     let span = addComponent('glider', '') // TODO: Remove ": "
 
-    components.appendChild(span)
+    return span
 }
 
 function glider(arr) {
@@ -201,27 +201,27 @@ function glider(arr) {
     return ''
 }
 
-function build_item_model(components) {
+function build_item_model() {
     let span = addComponent('item_model', 'text')
 
-    components.appendChild(span)
+    return span
 }
 
 function item_model(arr) {
     return `item_model="${arr[0]}"`
 }
 
-function build_jukebox_playable(components) {
+function build_jukebox_playable() {
     let span = addComponent('jukebox_playable', 'text')
 
-    components.appendChild(span)
+    return span
 }
 
 function jukebox_playable(arr) {
     return `jukebox_playable="${arr[0]}"`
 }
 
-function build_lore(components) {
+function build_lore() {
     let span = addComponent('lore', 'text')
 
     const loreItalics = document.createElement('input')
@@ -232,7 +232,7 @@ function build_lore(components) {
     loreColour.type = 'text'
     span.appendChild(loreColour)
     // TODO: +/- Line
-    components.appendChild(span)
+    return span
 }
 
 function lore(arr) {
@@ -259,62 +259,66 @@ function lore(arr) {
     return component.replace(/,$/, ']')
 }
 
-function build_map_color(components) {
+function build_map_color() {
     let span = addComponent('map_color', 'color')
 
-    components.appendChild(span)
+    return span
 }
 
 function map_color(arr) {
     return `map_color=${arr[0]}`
 }
 
-function build_map_id(components) {
+function build_map_id() {
     let span = addComponent('map_id', 'number')
 
-    components.appendChild(span)
+    return span
 }
 
 function map_id(arr) {
     return `map_id=${arr[0]}`
 }
 
-function build_max_damage(components) {
+function build_max_damage() {
     let span = addComponent('max_damage', 'number')
 
-    components.appendChild(span)
+    return span
 }
 
 function max_damage(arr) {
     return `max_damage=${arr[0]}`
 }
 
-function build_max_stack_size(components) {
+function build_max_stack_size() {
     let span = addComponent('max_stack_size', 'number')
 
-    components.appendChild(span)
+    return span
 }
 
 function max_stack_size(arr) {
     return `max_stack_size=${arr[0]}`
 }
 
-function build_ominous_bottle_amplifier(components) {
+function build_ominous_bottle_amplifier() {
     let span = addComponent('ominous_bottle_amplifier', 'number')
 
     span.children[2].min = 0
     span.children[2].max = 4
 
-    components.appendChild(span)
+    return span
 }
 
 function ominous_bottle_amplifier(arr) {
     return `ominous_bottle_amplifier=${arr[0]}`
 }
 
-function build_rarity(components) {
-    let span = document.createElement('span')
+function build_rarity() {
+    let span = document.createElement('details')
     span.id = 'rarity'
+
+    const summary = document.createElement('summary')
+    summary.innerText = 'rarity'
+    span.appendChild(summary)
 
     const useCheck = document.createElement('input')
     useCheck.type = 'checkbox'
@@ -330,14 +334,14 @@ function build_rarity(components) {
 
     span.appendChild(buildSelect(['Common', 'Uncommon', 'Rare', 'Epic']))
 
-    components.appendChild(span)
+    return span
 }
 
 function rarity(arr) {
     return `rarity=${arr[0].toLowerCase()}`
 }
 
-function build_recipes(components) {
+function build_recipes() {
     let span = addComponent('recipes', 'text')
     span.id = ''
 
@@ -363,7 +367,7 @@ function build_recipes(components) {
     wrapper.appendChild(pBtn)
     wrapper.appendChild(mBtn)
 
-    components.appendChild(wrapper)
+    return wrapper
 }
 
 function recipes(arr) {
@@ -378,10 +382,10 @@ function recipes(arr) {
     return component.replace(/,$/, ']')
 }
 
-function build_unbreakable(components) {
+function build_unbreakable() {
     let span = addComponent('unbreakable', '') // TODO: Remove ": "
 
-    components.appendChild(span)
+    return span
 }
 
 function unbreakable(arr) {

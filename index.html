@@ -5,19 +5,22 @@
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
-        <h1>Components Editor</h1>
-        <div id="itemList">
-            <div id="ddl">
-                <input type="text" placeholder="Search items" id="searchInput">
-            </div>
-            <div id="editor">
-                <div id="components"></div>
-                <button id="generate">Generate Command</button>
-                <input type="text" placeholder="Command goes here" id="command">
-                <!-- TODO: Can we use /data to split this command -->
-                <p class="Warning256">Command is over 256 characters and will need to be entered via command block</p>
+        <div class="list">
+            <h1>Components Editor</h1>
+            <div id="itemList">
+                <div id="ddl">
+                    <input type="text" placeholder="Search items" id="searchInput">
+                </div>
+                <div id="editor">
+                    <div id="components"></div>
+                    <button id="generate">Generate Command</button>
+                    <input type="text" placeholder="Command goes here" id="command">
+                    <!-- TODO: Can we use /data to split this command -->
+                    <p class="Warning256">Command is over 256 characters and will need to be entered via command block</p>
+                </div>
             </div>
         </div>
+        <div class="edit"></div>
         <script src="components.js"></script>
         <script src="index.js"></script>
     </body>
