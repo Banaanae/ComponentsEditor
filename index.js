@@ -71,7 +71,7 @@ function designPage(item) {
 
 }
 
-function addComponentsByType(name) {
+function addComponentsBuilders(name) {
     const editWin = document.querySelector('.edit')
 
     // Step 1: Universal

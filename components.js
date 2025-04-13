@@ -270,11 +270,24 @@ function max_damage(arr) {
 function build_max_stack_size() {
     let span = addComponent('max_stack_size', ['max_stack_size', 'number'])
 
+    span.children[3].min = 1
+    span.children[3].max = 99
+
     return span
 }
 
 function max_stack_size(arr) {
     return `max_stack_size=${arr[0]}`
+}
+
+function build_note_block_sound() {
+    let details = addComponent('note_block_sound', ['note_block_sound', 'text'])
+
+    return details
+}
+
+function note_block_sound(arr) {
+    return `note_block_sound=${arr[0]}`
 }
 
 function build_ominous_bottle_amplifier() {
@@ -288,6 +301,17 @@ function build_ominous_bottle_amplifier() {
 
 function ominous_bottle_amplifier(arr) {
     return `ominous_bottle_amplifier=${arr[0]}`
+}
+
+function build_profile() {
+    let details = addComponent('profile', ['name', 'text'])
+
+    // TODO: UUID
+    return details
+}
+
+function profile(arr) {
+    return `profile=${arr[0]}`
 }
 
 function build_rarity() {

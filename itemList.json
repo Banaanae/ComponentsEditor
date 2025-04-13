@@ -26,6 +26,13 @@
             "ominous_bottle_amplifier"
         ]
     },
+    "player_head" : {
+        "name": "minecraft:player_head",
+        "custom": [
+            "note_block_sound",
+            "profile"
+        ]
+    },
     "wooden_hoe": {
         "name": "minecraft:wooden_hoe",
         "custom": []
