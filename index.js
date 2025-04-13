@@ -89,7 +89,7 @@ function addComponentsByType(name, type) {
 }
 
 // Helper func to do what all components need
-function addComponent(name, iType) {
+function addComponent(name, inputsArr) {
     let span = document.createElement('details')
     span.id = name
 
@@ -115,10 +115,20 @@ function addComponent(name, iType) {
     activeLabel.for = useCheck.id
     span.appendChild(activeLabel)
 
-    if (iType !== 'none') {
-        const input = document.createElement('input')
-        input.type = iType
-        span.appendChild(input)
+    if (inputsArr.length % 2 !== 0)
+        console.error('Malformed inputs array passed! Expected even length, got length of: ' + inputsArr.length)
+
+    for (let i = 0; i < inputsArr.length; i += 2) {
+        span.appendChild(document.createElement('br'))
+        const inputName = document.createElement('span')
+        inputName.innerText = inputsArr[i] + ': '
+        span.appendChild(inputName)
+        
+        if (inputsArr[i + 1] !== 'none') {
+            const input = document.createElement('input')
+            input.type = inputsArr[i + 1]
+            span.appendChild(input)
+        }
     }
 
     return span

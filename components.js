@@ -1,7 +1,7 @@
 const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
 
 function build_break_sound() {
-    let span = addComponent('break_sound', 'text')
+    let span = addComponent('break_sound', ['break_sound', 'text'])
 
     return span
 }
@@ -11,7 +11,7 @@ function break_sound(arr) {
 }
 
 function build_consumable() {
-    let span = addComponent('consumable', 'number')
+    let span = addComponent('consumable', ['consume_seconds', 'number'])
 
     span.children[2].step = 0.1
 
@@ -129,15 +129,7 @@ function consumable(arr) {
 }
 
 function build_custom_name() {
-    let span = addComponent('custom_name', 'text')
-    
-    const nameColour = document.createElement('input')
-    nameColour.type = 'text'
-    span.appendChild(nameColour)
-
-    const nameItalics = document.createElement('input')
-    nameItalics.type = 'checkbox'
-    span.appendChild(nameItalics)
+    let span = addComponent('custom_name', ['text', 'text', 'color', 'text', 'italic', 'checkbox'])
 
     return span
 }
@@ -157,7 +149,7 @@ function custom_name(arr) {
 }
 
 function build_damage() {
-    let span = addComponent('damage', 'number')
+    let span = addComponent('damage', ['damage', 'number'])
 
     return span
 }
@@ -167,16 +159,9 @@ function damage(arr) {
 }
 
 function build_food() {
-    let span = addComponent('food', 'number')
+    let span = addComponent('food', ['nutrition', 'number', 'saturation', 'number', 'can_always_eat', 'checkbox'])
 
-    let saturation = document.createElement('input')
-    saturation.type = 'number'
-    saturation.step = '0.1'
-    span.appendChild(saturation)
-
-    let can_always_eat = document.createElement('input')
-    can_always_eat.type = 'checkbox'
-    span.appendChild(can_always_eat)
+    span.children[5].step = 0.1
 
     return span
 }
@@ -190,7 +175,7 @@ function food(arr) {
 }
 
 function build_glider() {
-    let span = addComponent('glider', 'none')
+    let span = addComponent('glider', [])
 
     return span
 }
@@ -202,7 +187,7 @@ function glider(arr) {
 }
 
 function build_item_model() {
-    let span = addComponent('item_model', 'text')
+    let span = addComponent('item_model', ['item_model', 'text'])
 
     return span
 }
@@ -212,7 +197,7 @@ function item_model(arr) {
 }
 
 function build_jukebox_playable() {
-    let span = addComponent('jukebox_playable', 'text')
+    let span = addComponent('jukebox_playable', ['jukebox_playable', 'text'])
 
     return span
 }
@@ -222,15 +207,8 @@ function jukebox_playable(arr) {
 }
 
 function build_lore() {
-    let span = addComponent('lore', 'text')
+    let span = addComponent('lore', ['text', 'text', 'italic', 'checkbox', 'color', 'text'])
 
-    const loreItalics = document.createElement('input')
-    loreItalics.type = 'checkbox'
-    span.appendChild(loreItalics)
-
-    const loreColour = document.createElement('input')
-    loreColour.type = 'text'
-    span.appendChild(loreColour)
     // TODO: +/- Line
     return span
 }
@@ -260,7 +238,7 @@ function lore(arr) {
 }
 
 function build_map_color() {
-    let span = addComponent('map_color', 'color')
+    let span = addComponent('map_color', ['map_color', 'color'])
 
     return span
 }
@@ -270,7 +248,7 @@ function map_color(arr) {
 }
 
 function build_map_id() {
-    let span = addComponent('map_id', 'number')
+    let span = addComponent('map_id', ['map_id', 'number'])
 
     return span
 }
@@ -280,7 +258,7 @@ function map_id(arr) {
 }
 
 function build_max_damage() {
-    let span = addComponent('max_damage', 'number')
+    let span = addComponent('max_damage', ['max_damage', 'number'])
 
     return span
 }
@@ -290,7 +268,7 @@ function max_damage(arr) {
 }
 
 function build_max_stack_size() {
-    let span = addComponent('max_stack_size', 'number')
+    let span = addComponent('max_stack_size', ['max_stack_size', 'number'])
 
     return span
 }
@@ -300,7 +278,7 @@ function max_stack_size(arr) {
 }
 
 function build_ominous_bottle_amplifier() {
-    let span = addComponent('ominous_bottle_amplifier', 'number')
+    let span = addComponent('ominous_bottle_amplifier', ['ominous_bottle_amplifier', 'number'])
 
     span.children[2].min = 0
     span.children[2].max = 4
@@ -313,7 +291,7 @@ function ominous_bottle_amplifier(arr) {
 }
 
 function build_rarity() {
-    let span = addComponent('rarity', 'none')
+    let span = addComponent('rarity', ['rarity', 'none'])
 
     span.appendChild(buildSelect(['Common', 'Uncommon', 'Rare', 'Epic']))
 
@@ -325,7 +303,7 @@ function rarity(arr) {
 }
 
 function build_recipes() {
-    let span = addComponent('recipes', 'text')
+    let span = addComponent('recipes', ['recipes', 'text'])
     span.id = ''
 
     let wrapper = document.createElement('span')
@@ -366,7 +344,7 @@ function recipes(arr) {
 }
 
 function build_unbreakable() {
-    let span = addComponent('unbreakable', 'none')
+    let span = addComponent('unbreakable', [])
 
     return span
 }
