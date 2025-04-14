@@ -158,6 +158,16 @@ function damage(arr) {
     return `damage=${arr[0]}`
 }
 
+function build_dyed_color() {
+    let details = addComponent('dyed_color', ['dyed_color', 'color'])
+
+    return details
+}
+
+function dyed_color(arr) {
+    return `dyed_color=${arr[0]}`
+}
+
 function build_food() {
     let span = addComponent('food', ['nutrition', 'number', 'saturation', 'number', 'can_always_eat', 'checkbox'])
 
