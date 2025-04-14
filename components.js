@@ -1,4 +1,4 @@
-const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
+const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
 
 function build_break_sound() {
     let span = addComponent('break_sound', ['break_sound', 'text'])
@@ -166,6 +166,16 @@ function build_dyed_color() {
 
 function dyed_color(arr) {
     return `dyed_color=${arr[0]}`
+}
+
+function build_enchantment_glint_override() {
+    let details = addComponent('enchantment_glint_override', ['enchantment_glint_override', 'checkbox'])
+
+    return details
+}
+
+function enchantment_glint_override(arr) {
+    return `enchantment_glint_override=${arr[0]}`
 }
 
 function build_food() {
