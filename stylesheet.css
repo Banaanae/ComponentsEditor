@@ -13,8 +13,10 @@
 
 #ddl {
     width: 250px;
+    max-height: 200px;
     border: 1px solid black;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 #ddl > * {

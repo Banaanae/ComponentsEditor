@@ -13,8 +13,18 @@ fetch('./itemList.json')
 function addEntries(itemList) {
     const ddlDiv = document.getElementById('ddl')
     for (var item in itemList) {
+        if (item === 'no-custom') {
+            itemList[item].forEach(block => {
+                createEntry(block)
+            })
+            continue
+        }
+        createEntry(item)
+    };
+
+    function createEntry(item) {
         const btn = document.createElement('button')
-        btn.innerText = itemList[item].name
+        btn.innerText = item
         ddlDiv.appendChild(btn)
         btn.addEventListener('click', function () {
             document.querySelectorAll('#ddl > button').forEach(button => {
@@ -22,7 +32,7 @@ function addEntries(itemList) {
             })
             designPage(btn.innerText)
         })
-    };
+    }
 }
 
 document.getElementById('generate').addEventListener('click', generateCommand)
