@@ -1,4 +1,4 @@
-const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable'];
+const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable', 'weapon'];
 
 function build_break_sound() {
     let span = addComponent('break_sound', ['break_sound', 'text'])
@@ -107,7 +107,7 @@ function consumable(arr) {
     if (arr[1] !== 'eat')
         component += `animation:"${arr[1]}",`
 
-    if (arr[2] !== 'entity.generic.eat' || arr[2] !== '')
+    if (arr[2] !== 'entity.generic.eat' && arr[2] !== '')
         component += `sound:"${arr[2]}",`
 
     if (arr[3] !== 'true')
@@ -416,4 +416,25 @@ function unbreakable(arr) {
     if (arr[0] === 'true')
         return 'unbreakable={}'
     return ''
+}
+
+function build_weapon() {
+    let details = addComponent('weapon', ['item_damage_per_attack', 'number', 'disable_blocking_for_seconds', 'number'])
+
+    details.children[9].step = 0.1
+
+    return details
+}
+
+function weapon(arr) {
+    let weapon = 'weapon={'
+    console.log(arr)
+
+    if (arr[0] != 1 && arr[0] !== '')
+        weapon += `item_damage_per_attack:${arr[0]},`
+
+    if (arr[1] != 0 && arr[1] !== '')
+        weapon += `disable_blocking_for_seconds:${arr[1]},`
+
+    return weapon.replace(/,$/, '') + '}'
 }
