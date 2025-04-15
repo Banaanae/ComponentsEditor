@@ -148,14 +148,14 @@ function build_custom_name() {
 
 function custom_name(arr) {
     let component = "custom_name=";
-    component += '\'{text:"' + arr[0] + '"'
+    component += '{text:"' + arr[0] + '"'
     
     if (arr[1] !== "")
         component += ',color:"' + arr[1] + '"'
     
     if (arr[2] !== 'true')
         component += ',italic:false'
-    component += '}\''
+    component += '}'
 
     return component
 }
@@ -250,19 +250,18 @@ function lore(arr) {
     for (let i = 0; i < arr.length; i++) {
         switch (i % 3) {
             case 0: { // Text
-                component += '\'{text:"' + arr[i] + '"'
+                component += '{text:"' + arr[i] + '"'
                 break
             }
             case 1: { // Italic
-                if (arr[i] === 'true')
-                    break
-                component += ',italic:false'
+                if (arr[i] === 'false')
+                    component += ',italic:false'
                 break
             }
             case 2: { // Colour
-                if (arr[i] !== "")
+                if (arr[i] !== 'dark_purple' && arr[i] !== '')
                     component += ',color:' + arr[i]
-                component += '}\','
+                component += '},'
             }
         }
     }
