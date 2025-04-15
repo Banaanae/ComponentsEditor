@@ -11,29 +11,29 @@ function break_sound(arr) {
 }
 
 function build_consumable() {
-    let span = addComponent('consumable', ['consume_seconds', 'number'])
+    let span = addComponent('consumable', ['consume_seconds', 'number', 'animation', 'none', 'sound', 'text', 'has_consume_particles', 'checkbox', 'on_consume_effects', 'none'])
 
     span.children[2].step = 0.1
 
-    span.appendChild(buildSelect(['none', 'eat', 'drink', 'block', 'bow', 'spear', 'crossbow', 'spyglass', 'toot_horn', 'brush']))
-
-    let sound = document.createElement('input')
-    sound.type = 'text'
-    span.appendChild(sound)
-
-    let has_consume_particles = document.createElement('input')
-    has_consume_particles.type = 'checkbox'
-    span.appendChild(has_consume_particles)
+    let animation = buildSelect(['none', 'eat', 'drink', 'block', 'bow', 'spear', 'crossbow', 'spyglass', 'toot_horn', 'brush'])
+    span.children[8].appendChild(animation)
 
     let on_consume_effects = buildSelect(['apply_effects', 'remove_effects', 'clear_all_effects', 'teleport_randomly', 'play_sound'], true)
-    span.appendChild(on_consume_effects)
+    span.children[16].appendChild(on_consume_effects)
+    span.appendChild(document.createElement('br'))
 
     let apply_effects = document.createElement('span')
     apply_effects.style.display = 'none'
+    let apply_effects_header = document.createElement('span')
+    apply_effects_header.innerText = 'effects: '
+    apply_effects.appendChild(apply_effects_header)
     span.appendChild(apply_effects)
 
     let remove_effects = document.createElement('span')
     remove_effects.style.display = 'none'
+    let remove_effects_header = document.createElement('span')
+    remove_effects_header.innerText = 'remove effects: '
+    remove_effects.appendChild(remove_effects_header)
     let wrapper = document.createElement('span')
     remove_effects.appendChild(wrapper)
 
@@ -59,21 +59,30 @@ function build_consumable() {
     remove_effects.appendChild(pBtn)
     remove_effects.appendChild(mBtn)
     span.appendChild(remove_effects)
+    span.appendChild(document.createElement('br'))
 
     let clear_all_effects = document.createElement('span')
     clear_all_effects.style.display = 'none'
     span.appendChild(clear_all_effects)
+    span.appendChild(document.createElement('br'))
 
     let teleport_randomly = document.createElement('span')
     teleport_randomly.style.display = 'none'
+    let teleport_randomly_header = document.createElement('span')
+    teleport_randomly_header.innerText = 'diameter: '
+    teleport_randomly.appendChild(teleport_randomly_header)
     let diameter = document.createElement('input')
     diameter.type = 'number'
     diameter.step = '0.1'
     teleport_randomly.appendChild(diameter)
     span.appendChild(teleport_randomly)
+    span.appendChild(document.createElement('br'))
 
     let play_sound = document.createElement('span')
     play_sound.style.display = 'none'
+    let play_sound_header = document.createElement('span')
+    play_sound_header.innerText = 'play_sound: '
+    play_sound.appendChild(play_sound_header)
     let sound2 = document.createElement('input')
     sound2.type = 'text'
     play_sound.appendChild(sound2)
@@ -82,7 +91,7 @@ function build_consumable() {
 
     on_consume_effects.addEventListener('change', function () {
         for (let i = 0; i < on_consume_effects.length; i++) {
-            document.querySelector('#consumable > span:nth-child(' + (i + 8) + ')').style.display = (on_consume_effects[i].selected) ? 'inline' : 'none'
+            document.querySelector('#consumable > span:nth-of-type(' + (i + 6) + ')').style.display = (on_consume_effects[i].selected) ? 'inline' : 'none'
         }
     })
 
@@ -98,7 +107,7 @@ function consumable(arr) {
     if (arr[1] !== 'eat')
         component += `animation:"${arr[1]}",`
 
-    if (arr[2] !== 'entity.generic.eat')
+    if (arr[2] !== 'entity.generic.eat' || arr[2] !== '')
         component += `sound:"${arr[2]}",`
 
     if (arr[3] !== 'true')
@@ -117,15 +126,18 @@ function consumable(arr) {
     if (arr[4].clear_all_effects)
         consumeFX += '{type:"minecraft:clear_all_effects"},'
 
-    if (arr[4].teleport_randomly)
-        consumeFX += `{type:"minecraft:teleport_randomly",diameter:${arr[arr.length - 2]}},`
+    if (arr[4].teleport_randomly) {
+        consumeFX += `{type:"minecraft:teleport_randomly",`
+        if (arr[arr.length - 2] !== 16)
+            consumeFX += `diameter:${arr[arr.length - 2]}},`
+    }
 
     if (arr[4].play_sound)
         consumeFX += `{type:"minecraft:play_sound",sound:"${arr[arr.length - 1]}"},`
 
     if (consumeFX !== 'on_consume_effects:[')
-        return component + consumeFX.replace(/,$/, ']}]')
-    return component.replace(/,$/, '}]')
+        return component + consumeFX.replace(/,$/, ']}')
+    return component.replace(/,$/, '}')
 }
 
 function build_custom_name() {

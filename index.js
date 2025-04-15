@@ -90,9 +90,11 @@ function addComponentsBuilders(name) {
     });
 
     // Step 2: Custom
-    ILJson[name].custom.forEach(func => {
-        editWin.appendChild(window['build_' + func]())
-    });
+    if (ILJson.hasOwnProperty(name)) {
+        ILJson[name].custom.forEach(func => {
+            editWin.appendChild(window['build_' + func]())
+        });
+    }
 }
 
 // Helper func to do what all components need
