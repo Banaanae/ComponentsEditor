@@ -57,3 +57,7 @@
 .edit > details > p {
     display: block
 }
+
+.bold {
+    font-weight: bold;
+}

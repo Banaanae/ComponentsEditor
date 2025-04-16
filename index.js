@@ -133,7 +133,9 @@ function addComponent(name, inputsArr) {
         inputName.innerText = inputsArr[i] + ': '
         span.appendChild(inputName)
         
-        if (inputsArr[i + 1] !== 'none') {
+        if (inputsArr[i + 1] === 'header') {
+            inputName.classList.add('bold')
+        } else if (inputsArr[i + 1] !== 'none') {
             const input = document.createElement('input')
             input.type = inputsArr[i + 1]
             span.appendChild(input)
@@ -206,7 +208,7 @@ function getDataFromElement(element) {
         }
         case 'select': {
             if (element.type === 'select-multiple') {
-                let result = {} // Use object so concat doesn't merge
+                let result = {}
                 for (let i = 0; i < element.length; i++) {
                     result[element[i].value] = element[i].selected
                 }
@@ -222,7 +224,12 @@ function getDataFromElement(element) {
 function spanToArr(span) {
     let spanArr = []
     for (let i = 0; i < span.children.length; i++) {
-        spanArr = spanArr.concat(getDataFromElement(span.children[i]))
+        let spanData = getDataFromElement(span.children[i])
+        if (spanData.length <= 1)
+            spanArr = spanArr.concat(spanData)
+        else
+            spanArr.push(spanData)
+        spanArr.push()
         if (spanArr[spanArr.length - 1] === 'pop')
             spanArr.pop()
     }

@@ -1,4 +1,70 @@
-const universal = ['break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'unbreakable', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repair_cost', 'unbreakable', 'weapon'];
+
+function build_blocks_attacks() {
+    let details = addComponent('blocks_attacks', ['block_delay_seconds', 'number', 'disable_cooldown_scale', 'number',
+        'damage_reductions', 'header', 'type', 'text', 'base', 'number', 'factor', 'number', 'horizontal_blocking_angle', 'number',
+        'item_damage', 'header', 'threshold', 'number', 'base', 'number', 'factor', 'number',
+        'block_sound', 'text', 'disabled_sound', 'text', 'bypassed_by', 'text'])
+
+    // TODO: Type +/- and for headers
+    //       Float 0.1 steps, mins and maxes
+    return details
+}
+
+function blocks_attacks(arr) {
+
+    //give @s diamond_sword[blocks_attacks={disable_cooldown_scale:0,damage_reductions:[{types:[mob_attack,arrow,explosion],base:0,factor:0.5}],block_sound:block.anvil.place}]
+    console.log(arr)
+    let blocks_attacks = "blocks_attacks={"
+
+    if (arr[0] != 0 && arr[0] !== '')
+        blocks_attacks += `block_delay_seconds:${arr[0]},`
+
+    if (arr[1] != 1 && arr[1] !== '')
+        blocks_attacks += `disable_cooldown_scale:${arr[0]},`
+
+    let damage_reductions = 'damage_reductions:{'
+
+    if (arr[2] !== '')
+        console.log('TODO')
+
+    if (arr[3] !== '')
+        damage_reductions += `base:${arr[3]},`
+
+    if (arr[4] !== '')
+        damage_reductions += `factor:${arr[4]},`
+
+    if (arr[5] !== '')
+        damage_reductions += `horizontal_blocking_angle:${arr[5]},`
+
+    if (damage_reductions !== 'damage_reductions:{')
+        blocks_attacks += damage_reductions.replace(/,$/, "},")
+
+    let item_damage = 'item_damage:{'
+
+    if (arr[6] !== '')
+        item_damage += `threshold:${arr[6]},`
+
+    if (arr[7] !== '')
+        item_damage += `base:${arr[7]},`
+
+    if (arr[8] !== '')
+        item_damage += `factor:${arr[8]},`
+
+    if (item_damage !== 'item_damage:{')
+        blocks_attacks += item_damage.replace(/,$/, "},")
+    
+    if (arr[9] !== '')
+        blocks_attacks += `block_sound:${arr[9]},`
+
+    if (arr[10] !== '')
+        blocks_attacks += `disabled_sound:${arr[10]},`
+
+    if (arr[11] !== '')
+        console.log('TODO')
+
+    return blocks_attacks.replace(/,$/, '}')
+}
 
 function build_break_sound() {
     let span = addComponent('break_sound', ['break_sound', 'text'])
@@ -45,14 +111,14 @@ function build_consumable() {
     pBtn.innerText = '+'
     pBtn.addEventListener('click', function () {
         let input = document.createElement('input')
-        input.text = 'text'
         wrapper.appendChild(input)
     })
 
     let mBtn = document.createElement('button')
     mBtn.innerText = '-'
     mBtn.addEventListener('click', function () {
-        document.querySelector('#consumable > span:nth-child(9) > span > input:last-child').remove()
+        if (document.querySelectorAll('#consumable > span:nth-child(9) > span > input:last-child').length !== 1)
+            document.querySelector('#consumable > span:nth-child(9) > span > input:last-child').remove()
     })
 
     remove_effects.appendChild(wrapper)
@@ -188,6 +254,74 @@ function build_enchantment_glint_override() {
 
 function enchantment_glint_override(arr) {
     return `enchantment_glint_override=${arr[0]}`
+}
+
+function build_equippable() {
+    let details = addComponent('equippable', ['slot', 'none', 'equip_sound', 'text', 'asset_id', 'text', 'allowed_entities', 'none',
+        'dispensable', 'checkbox', 'swappable', 'checkbox', 'damage_on_hurt', 'checkbox', 'equip_on_interact', 'checkbox', 'camera_overlay', 'text'])
+
+    details.children[5].appendChild(buildSelect(['head', 'chest', 'legs', 'feet', 'body', 'mainhand', 'offhand', 'saddle']))
+
+    let allowed_entities_br = details.children[14]
+
+    let allowed_entities = document.createElement('span')
+    allowed_entities.id = 'allowed_entities'
+    allowed_entities.appendChild(document.createElement('input'))
+
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        let input = document.createElement('input')
+        allowed_entities.appendChild(input)
+    })
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        if (document.querySelectorAll('#allowed_entities > input:last-child').length !== 1)
+            document.querySelector('#allowed_entities > input:last-child').remove()
+    })
+
+    details.insertBefore(allowed_entities, allowed_entities_br)
+    details.insertBefore(pBtn, allowed_entities_br)
+    details.insertBefore(mBtn, allowed_entities_br)
+
+    return details
+}
+
+function equippable(arr) {
+    let equippable = `equippable={slot:${arr[0]},`
+
+    if (arr[1] !== 'item.armor.equip_generic' && arr[1] !== '')
+        equippable += `equip_sound:"${arr[1]}",`
+
+    if (arr[2] !== '')
+        equippable += `asset_id:"${arr[2]}",`
+
+    let allowed_entities = 'allowed_entities:['
+    arr[3].forEach(allowed => {
+        if (allowed !== '')
+            allowed_entities += `"${allowed}",`
+    })
+    if (allowed_entities !== 'allowed_entities:[')
+        equippable += allowed_entities.replace(/,$/, '],')
+
+    if (arr[4] !== 'true' && arr[4] !== '')
+        equippable += `dispensable:false,`
+
+    if (arr[5] !== 'true' && arr[4] !== '')
+        equippable += `swappable:false,`
+
+    if (arr[6] !== 'true' && arr[4] !== '')
+        equippable += `damage_on_hurt:false,`
+
+    if (arr[7] !== 'true' && arr[4] !== '')
+        equippable += `equip_on_interact:false,`
+    
+    if (arr[8] !== '')
+        equippable += `camera_overlay:"${arr[8]}",`
+
+    return equippable.replace(/,$/, '}')
 }
 
 function build_food() {
@@ -375,7 +509,6 @@ function build_recipes() {
     pBtn.innerText = '+'
     pBtn.addEventListener('click', function () {
         let input = document.createElement('input')
-        input.text = 'text'
         wrapper.appendChild(input)
     })
 
@@ -394,15 +527,26 @@ function build_recipes() {
 }
 
 function recipes(arr) {
-    if (arr.length === 0)
-        return ""
+    let recipes = 'recipes=['
 
-    let component = 'recipes=['
-    arr.forEach(recipe => {
-        component += '"' + recipe + '",'
-    });
+    arr[0].forEach(recipe => {
+        if (recipe !== '')
+            recipes += `"${recipe}",`
+    })
+    if (recipes !== 'recipes=[')
+        return recipes.replace(/,$/, '],')
 
-    return component.replace(/,$/, ']')
+    return ''
+}
+
+function build_repair_cost() {
+    let details = addComponent('repair_cost', ['repair_cost', 'number'])
+
+    return details
+}
+
+function repair_cost(arr) {
+    return `repair_cost:${arr[0]}`
 }
 
 function build_unbreakable() {
