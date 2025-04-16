@@ -299,10 +299,12 @@ function equippable(arr) {
         equippable += `asset_id:"${arr[2]}",`
 
     let allowed_entities = 'allowed_entities:['
-    arr[3].forEach(allowed => {
-        if (allowed !== '')
-            allowed_entities += `"${allowed}",`
-    })
+    if (Array.isArray(arr[3])) {
+        arr[3].forEach(allowed => {
+            if (allowed !== '')
+                allowed_entities += `"${allowed}",`
+        })
+    }
     if (allowed_entities !== 'allowed_entities:[')
         equippable += allowed_entities.replace(/,$/, '],')
 
@@ -529,10 +531,12 @@ function build_recipes() {
 function recipes(arr) {
     let recipes = 'recipes=['
 
-    arr[0].forEach(recipe => {
-        if (recipe !== '')
-            recipes += `"${recipe}",`
-    })
+    if (Array.isArray(arr[0])) {
+        arr[0].forEach(recipe => {
+            if (recipe !== '')
+                recipes += `"${recipe}",`
+        })
+    }
     if (recipes !== 'recipes=[')
         return recipes.replace(/,$/, '],')
 
