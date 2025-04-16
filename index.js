@@ -162,7 +162,7 @@ function generateCommand() {
     const componentsDiv = document.querySelector('.edit')
     const commandBox = document.getElementById('command')
     const item = document.getElementById('currItem').innerText
-    let command = '/give @s ' + item // TODO: recipient
+    let command = '/give @p ' + item // TODO: recipient
     let components = ''
 
     let compArr;
