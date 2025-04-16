@@ -470,6 +470,20 @@ function ominous_bottle_amplifier(arr) {
     return `ominous_bottle_amplifier=${arr[0]}`
 }
 
+function build_pot_decorations() {
+    let details = addComponent('pot_decorations', ['sherd 1', 'text', 'sherd 2', 'text', 'sherd 3', 'text', 'sherd 4', 'text'])
+
+    return details
+}
+
+function pot_decorations(arr) {
+    let s1 = '"' + (arr[0] !== '' ? arr[0] : 'brick') +'"'
+    let s2 = '"' + (arr[1] !== '' ? arr[1] : 'brick') +'"'
+    let s3 = '"' + (arr[2] !== '' ? arr[2] : 'brick') +'"'
+    let s4 = '"' + (arr[3] !== '' ? arr[3] : 'brick') +'"'
+    return `pot_decorations=[${s1},${s2},${s3},${s4}]`.replace(/("(minecraft:)?brick",?)+(?=]$)/, '')
+}
+
 function build_profile() {
     let details = addComponent('profile', ['name', 'text'])
 

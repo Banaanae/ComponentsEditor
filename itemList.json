@@ -44,7 +44,7 @@
         "cut_copper_stairs", "cut_red_sandstone", "cut_red_sandstone_slab", "cut_sandstone", "cut_sandstone_slab", "cyan_banner", "cyan_bed", "cyan_candle", "cyan_carpet", "cyan_concrete", "cyan_concrete_powder", "cyan_glazed_terracotta", "cyan_shulker_box", "cyan_stained_glass", "cyan_stained_glass_pane", "cyan_terracotta",
         "cyan_wool", "damaged_anvil", "dandelion", "dark_oak_button", "dark_oak_door", "dark_oak_fence", "dark_oak_fence_gate", "dark_oak_hanging_sign", "dark_oak_leaves", "dark_oak_log", "dark_oak_planks", "dark_oak_pressure_plate", "dark_oak_sapling", "dark_oak_sign", "dark_oak_slab", "dark_oak_stairs",
         "dark_oak_trapdoor", "dark_oak_wood", "dark_prismarine", "dark_prismarine_slab", "dark_prismarine_stairs", "daylight_detector", "dead_brain_coral", "dead_brain_coral_block", "dead_brain_coral_fan", "dead_bubble_coral", "dead_bubble_coral_block", "dead_bubble_coral_fan", "dead_bush", "dead_fire_coral", "dead_fire_coral_block", "dead_fire_coral_fan",
-        "dead_horn_coral", "dead_horn_coral_block", "dead_horn_coral_fan", "dead_tube_coral", "dead_tube_coral_block", "dead_tube_coral_fan", "decorated_pot", "deepslate", "deepslate_bricks", "deepslate_brick_slab", "deepslate_brick_stairs", "deepslate_brick_wall", "deepslate_coal_ore", "deepslate_copper_ore", "deepslate_diamond_ore", "deepslate_emerald_ore",
+        "dead_horn_coral", "dead_horn_coral_block", "dead_horn_coral_fan", "dead_tube_coral", "dead_tube_coral_block", "dead_tube_coral_fan", "deepslate", "deepslate_bricks", "deepslate_brick_slab", "deepslate_brick_stairs", "deepslate_brick_wall", "deepslate_coal_ore", "deepslate_copper_ore", "deepslate_diamond_ore", "deepslate_emerald_ore",
         "deepslate_gold_ore", "deepslate_iron_ore", "deepslate_lapis_lazuli_ore", "deepslate_redstone_ore", "deepslate_tiles", "deepslate_tile_slab", "deepslate_tile_stairs", "deepslate_tile_wall", "detector_rail", "diamond_ore", "diorite", "diorite_slab", "diorite_stairs", "diorite_wall", "dirt", "dirt_path",
         "dispenser", "dragon_egg", "dragon_head", "dried_kelp_block", "dripstone_block", "dropper", "emerald_ore", "enchanting_table", "ender_chest", "end_portal_frame", "end_rod", "end_stone", "end_stone_bricks", "end_stone_brick_slab", "end_stone_brick_stairs", "end_stone_brick_wall",
         "exposed_chiseled_copper", "exposed_copper", "exposed_copper_bulb", "exposed_copper_door", "exposed_copper_grate", "exposed_copper_trapdoor", "exposed_cut_copper", "exposed_cut_copper_slab", "exposed_cut_copper_stairs", "farmland", "fern", "fire_coral", "fire_coral_block", "fire_coral_fan", "fletching_table", "flowering_azalea",
@@ -86,8 +86,12 @@
         "white_carpet", "white_concrete", "white_concrete_powder", "white_glazed_terracotta", "white_shulker_box", "white_stained_glass", "white_stained_glass_pane", "white_terracotta", "white_tulip", "white_wool", "wither_rose", "wither_skeleton_skull", "yellow_banner", "yellow_bed", "yellow_candle", "yellow_carpet",
         "yellow_concrete", "yellow_concrete_powder", "yellow_glazed_terracotta", "yellow_shulker_box", "yellow_stained_glass", "yellow_stained_glass_pane", "yellow_terracotta", "yellow_wool", "zombie_head"
     ],
+    "decorated_pot": {
+        "custom": [
+            "pot_decorations"
+        ]
+    },
     "filled_map": {
-        "name": "filled_map",
         "custom": [
             "map_color",
             "map_id"
