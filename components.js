@@ -12,9 +12,6 @@ function build_blocks_attacks() {
 }
 
 function blocks_attacks(arr) {
-
-    //give @s diamond_sword[blocks_attacks={disable_cooldown_scale:0,damage_reductions:[{types:[mob_attack,arrow,explosion],base:0,factor:0.5}],block_sound:block.anvil.place}]
-    console.log(arr)
     let blocks_attacks = "blocks_attacks={"
 
     if (arr[0] != 0 && arr[0] !== '')
