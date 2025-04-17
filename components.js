@@ -478,7 +478,8 @@ function pot_decorations(arr) {
     let s2 = '"' + (arr[1] !== '' ? arr[1] : 'brick') +'"'
     let s3 = '"' + (arr[2] !== '' ? arr[2] : 'brick') +'"'
     let s4 = '"' + (arr[3] !== '' ? arr[3] : 'brick') +'"'
-    return `pot_decorations=[${s1},${s2},${s3},${s4}]`.replace(/("(minecraft:)?brick",?)+(?=]$)/, '')
+    let pot_decorations = `pot_decorations=[${s1},${s2},${s3},${s4}]`.replace(/("(minecraft:)?brick",?)+(?=]$)/, '')
+    return (pot_decorations !== 'pot_decorations=[]' ? pot_decorations : '')
 }
 
 function build_profile() {
