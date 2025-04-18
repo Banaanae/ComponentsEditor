@@ -21,7 +21,7 @@
         "pillager_spawn_egg", "pink_dye", "pitcher_pod", "plenty_pottery_sherd", "poisonous_potato", "polar_bear_spawn_egg", "popped_chorus_fruit", "potato", "potion", "powder_snow_bucket", "prismarine_crystals", "prismarine_shard", "prize_pottery_sherd", "pufferfish", "pufferfish_spawn_egg", "pumpkin_pie",
         "pumpkin_seeds", "purple_dye", "rabbit_foot", "rabbit_hide", "rabbit_spawn_egg", "rabbit_stew", "raiser_armor_trim", "ravager_spawn_egg", "raw_beef", "raw_chicken", "raw_cod", "raw_copper", "raw_gold", "raw_iron", "raw_mutton", "raw_porkchop",
         "raw_rabbit", "raw_salmon", "recovery_compass", "redstone_dust", "red_dye", "rib_armor_trim", "rotten_flesh", "saddle", "salmon_spawn_egg", "scrape_pottery_sherd", "scute", "sentry_armor_trim", "shaper_armor_trim", "sheaf_pottery_sherd", "shears", "sheep_spawn_egg",
-        "shelter_pottery_sherd", "shield", "shulker_shell", "shulker_spawn_egg", "silence_armor_trim", "silverfish_spawn_egg", "skeleton_horse_spawn_egg", "skeleton_spawn_egg", "skull_charge_banner_pattern", "skull_pottery_sherd", "slimeball", "slime_spawn_egg", "sniffer_spawn_egg", "snort_pottery_sherd", "snout_banner_pattern", "snowball",
+        "shelter_pottery_sherd", "shulker_shell", "shulker_spawn_egg", "silence_armor_trim", "silverfish_spawn_egg", "skeleton_horse_spawn_egg", "skeleton_spawn_egg", "skull_charge_banner_pattern", "skull_pottery_sherd", "slimeball", "slime_spawn_egg", "sniffer_spawn_egg", "snort_pottery_sherd", "snout_banner_pattern", "snowball",
         "snow_golem_spawn_egg", "spectral_arrow", "spider_eye", "spider_spawn_egg", "spire_armor_trim", "splash_potion", "spruce_boat", "spruce_chest_boat", "spyglass", "squid_spawn_egg", "steak", "stick", "stone_axe", "stone_hoe", "stone_pickaxe", "stone_shovel",
         "stone_sword", "stray_spawn_egg", "strider_spawn_egg", "string", "sugar", "suspicious_stew", "sweet_berries", "tadpole_spawn_egg", "thing_banner_pattern", "tide_armor_trim", "tipped_arrow", "tnt_minecart", "torchflower_seeds", "totem_of_undying", "trader_llama_spawn_egg", "trial_key",
         "trident", "tropical_fish", "tropical_fish_spawn_egg", "turtle_shell", "turtle_spawn_egg", "vex_armor_trim", "vex_spawn_egg", "villager_spawn_egg", "vindicator_spawn_egg", "wandering_trader_spawn_egg", "warden_spawn_egg", "ward_armor_trim", "warped_fungus_on_a_stick", "wayfinder_armor_trim", "wheat", "wheat_seeds",
@@ -131,6 +131,11 @@
         "custom": [
             "note_block_sound",
             "profile"
+        ]
+    },
+    "shield": {
+        "custom": [
+            "base_color"
         ]
     },
     "wolf_armor": {

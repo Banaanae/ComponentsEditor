@@ -1,5 +1,15 @@
 const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repair_cost', 'unbreakable', 'weapon'];
 
+function build_base_color() {
+    let details = addComponent('base_color', ['base_color', 'text'])
+
+    return details
+}
+
+function base_color(arr) {
+    return `base_color:"${arr[0]}"`
+}
+
 function build_blocks_attacks() {
     let details = addComponent('blocks_attacks', ['block_delay_seconds', 'number', 'disable_cooldown_scale', 'number',
         'damage_reductions', 'header', 'type', 'text', 'base', 'number', 'factor', 'number', 'horizontal_blocking_angle', 'number',
