@@ -305,15 +305,7 @@ function equippable(arr) {
     if (arr[2] !== '')
         equippable += `asset_id:"${arr[2]}",`
 
-    let allowed_entities = 'allowed_entities:['
-    if (Array.isArray(arr[3])) {
-        arr[3].forEach(allowed => {
-            if (allowed !== '')
-                allowed_entities += `"${allowed}",`
-        })
-    }
-    if (allowed_entities !== 'allowed_entities:[')
-        equippable += allowed_entities.replace(/,$/, '],')
+    equippable += generateList('allowed_entities:[', arr[3], true, true)
 
     if (arr[4] !== 'true' && arr[4] !== '')
         equippable += `dispensable:false,`
@@ -551,18 +543,9 @@ function build_recipes() {
 }
 
 function recipes(arr) {
-    let recipes = 'recipes=['
+    let recipes = generateList('recipes=[', arr[0], true, false)
 
-    if (Array.isArray(arr[0])) {
-        arr[0].forEach(recipe => {
-            if (recipe !== '')
-                recipes += `"${recipe}",`
-        })
-    }
-    if (recipes !== 'recipes=[')
-        return recipes.replace(/,$/, '],')
-
-    return ''
+    return recipes
 }
 
 function build_repair_cost() {

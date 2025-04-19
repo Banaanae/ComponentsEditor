@@ -10,6 +10,10 @@ fetch('./itemList.json')
         addEntries(ILJson)
     })
 
+/**
+ * Adds entries to the item search window
+ * @param {JSON} itemList The list of items
+ */
 function addEntries(itemList) {
     const ddlDiv = document.getElementById('ddl')
     for (var item in itemList) {
@@ -22,6 +26,10 @@ function addEntries(itemList) {
         createEntry(item)
     };
 
+    /**
+     * Creates the listeners and styling for each item
+     * @param {String} item Name of the item
+     */
     function createEntry(item) {
         const btn = document.createElement('button')
         btn.innerText = item
@@ -42,6 +50,9 @@ sInput.addEventListener('keyup', filterFunction)
 sInput.addEventListener('paste', filterFunction)
 
 // Modified from https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
+/**
+ * Filters the list of items with the user's search input
+ */
 function filterFunction() {
     const input = document.getElementById("searchInput");
     const filter = input.value.toUpperCase();
@@ -49,7 +60,6 @@ function filterFunction() {
     const btn = div.getElementsByTagName("button");
     for (let i = 0; i < btn.length; i++) {
         txtValue = btn[i].textContent || btn[i].innerText;
-        txtValue = txtValue.replace("minecraft:", '')
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             btn[i].style.display = "block";
         } else {
@@ -58,6 +68,10 @@ function filterFunction() {
     }
 }
 
+/**
+ * Sets up wrappers for the components
+ * @param {String} item Name of the item to build
+ */
 function designPage(item) {
     const main = document.getElementById('editor')
     document.querySelector('.edit').innerHTML = ''
@@ -73,14 +87,13 @@ function designPage(item) {
     mainEdits.appendChild(mainTitle)
     main.appendChild(mainEdits)
 
-    const name = mainTitle.innerText.replace('minecraft:', '')
-    addComponentsBuilders(name)
-    
-
-    // TODO: custom
-
+    addComponentsBuilders(mainTitle.innerText)
 }
 
+/**
+ * Adds the universal and custom component builders
+ * @param {String} name Name of the item to build for
+ */
 function addComponentsBuilders(name) {
     const editWin = document.querySelector('.edit')
 
@@ -97,7 +110,13 @@ function addComponentsBuilders(name) {
     }
 }
 
-// Helper func to do what all components need
+/**
+ * Helper func to add what all components need
+ * wiki reference, active checkbox, etc
+ * @param {String} name Name of the component
+ * @param {Array.<String>} inputsArr Array of input name and its input type
+ * @returns A details element with core requirements for an entry
+ */
 function addComponent(name, inputsArr) {
     let span = document.createElement('details')
     span.id = name
@@ -145,6 +164,12 @@ function addComponent(name, inputsArr) {
     return span
 }
 
+/**
+ * Builds a select menu with specified options
+ * @param {Array.<String>} options An array of option to choose from
+ * @param {Boolean} multiple Determines if the select should be a multi-select
+ * @returns A select element with specified options
+ */
 function buildSelect(options, multiple = false) {
     const select = document.createElement('select')
     let option;
@@ -158,6 +183,52 @@ function buildSelect(options, multiple = false) {
     return select
 }
 
+/**
+ * Generates a JSON array from an array
+ * @param {String} argument Argument name, with `=[` or `:[`
+ * @param {Array|String} value 
+ * @param {Boolean} isStr Determines is the value should be wrapped in quotes
+ * @param {Boolean} canBeStr If one value is passed, determines if [] can be removed
+ * @returns
+ */
+function generateList(argument, value, isStr, canBeStr) {
+    let removeSB = false
+    let oldArg = argument
+
+    if (Array.isArray(value)) {
+        if (canBeStr && value.length === 1)
+            removeSB = true
+
+        value.forEach(part => {
+            if (part !== '')
+                argument += (isStr ? `"${part}",` : `${part},`)
+        })
+
+        if (argument === oldArg)
+            return ''
+
+        argument = argument.replace(/,$/, '],')
+
+        // TODO: Length optimisation - removeSB if generated length = 1
+    } else {
+        if (canBeStr)
+            removeSB = true
+
+        if (value === '')
+            return ''
+
+        argument += (isStr ? `"${value}"]` : `${value}]`)
+    }
+
+    if (removeSB)
+        argument = argument.replace(/(.*?)\[(.*)]/, '$1$2,')
+
+    return argument
+}
+
+/**
+ * Generates a command from active components
+ */
 function generateCommand() {
     const componentsDiv = document.querySelector('.edit')
     const commandBox = document.getElementById('command')
@@ -196,6 +267,11 @@ function generateCommand() {
         document.querySelector('.Warning256').style.display = 'none'
 }
 
+/**
+ * Retrieves the data associated with an argument
+ * @param {HTMLElement} element An element which is a child of a component's details element
+ * @returns A string or array with an argument's value
+ */
 function getDataFromElement(element) {
     const type = element.tagName.toLowerCase()
     switch (type) {
@@ -221,6 +297,11 @@ function getDataFromElement(element) {
     }
 }
 
+/**
+ * Converts a span containing data to an array of data
+ * @param {HTMLElement.span} span A span received in getDataFromElement()
+ * @returns An array
+ */
 function spanToArr(span) {
     let spanArr = []
     for (let i = 0; i < span.children.length; i++) {
