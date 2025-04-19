@@ -3,7 +3,7 @@
  * And generating its part of the command
  */
 
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repair_cost', 'unbreakable', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -590,6 +590,50 @@ function unbreakable(arr) {
     if (arr[0] === 'true')
         return 'unbreakable={}'
     return ''
+}
+
+function build_use_cooldown() {
+    let details = addComponent('use_cooldown', ['seconds', 'number'])
+
+    details.children[5].step = 0.1
+
+    // TODO: cooldown_group
+
+    return details
+}
+
+function use_cooldown(arr) {
+    return `use_cooldown={seconds:${arr[0]}}`
+}
+
+function build_use_remainder() {
+    let details = addComponent('use_remainder', ['id', 'text', 'components', 'text', 'count', 'number'])
+
+    // TODO: Styling
+    let help = document.createElement('img')
+    help.src = '../res/help.svg'
+    help.alt = '?'
+    help.title = 'Paste in a full command'
+    help.width = 16
+    details.children[8].appendChild(help)
+
+    return details
+}
+
+function use_remainder(arr) {
+    let use_remainder = `use_remainder={id:"${arr[0]}"`
+
+    if (arr[1] !== '') {
+        // Convert components in command form to argument form
+        components = arr[1].replace(/.*?\[(.*)\].*/, '$1') // Extract components
+        components = components.replaceAll(/((\{|\[|,)\w+)=/g, '$1:') // Convert to arg form // TODO: Will replace strings if formatted to match regex
+        use_remainder += `,components:{${components}}`
+    }
+
+    if (arr[2] !== '1' && arr[2] !== '')
+        use_remainder += ',count:' + arr[2]
+
+    return use_remainder + '}'
 }
 
 function build_weapon() {

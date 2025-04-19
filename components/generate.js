@@ -195,7 +195,7 @@ function getDataFromElement(element) {
 
 /**
  * Converts a span containing data to an array of data
- * @param {HTMLElement.span} span A span received in getDataFromElement()
+ * @param {HTMLSpanElement} span A span received in getDataFromElement()
  * @returns An array
  */
 function spanToArr(span) {
