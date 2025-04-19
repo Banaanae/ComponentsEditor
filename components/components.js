@@ -3,7 +3,7 @@
  * And generating its part of the command
  */
 
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -568,6 +568,47 @@ function recipes(arr) {
     let recipes = generateList('recipes=[', arr[0], true, false)
 
     return recipes
+}
+
+function build_repairable() {
+    let details = addComponent('repairable', [])
+
+    let wrapper = document.createElement('span')
+
+    wrapper.appendChild(document.createElement('br'))
+    const inputName = document.createElement('span')
+    inputName.innerText = 'items: '
+    wrapper.appendChild(inputName)
+    
+    const input = document.createElement('input')
+    input.type = 'text'
+    wrapper.appendChild(input)
+
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        let input = document.createElement('input')
+        wrapper.appendChild(input)
+    })
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        if (document.querySelectorAll('#repairable > span > input').length !== 1)
+            document.querySelector('#repairable > span > input:last-child').remove()
+    })
+    
+    details.appendChild(wrapper)
+    details.appendChild(pBtn)
+    details.appendChild(mBtn)
+
+    return details
+}
+
+function repairable(arr) {
+    let repairable = generateList('repairable={items:[', arr[0], true, true)
+
+    return repairable.replace(/,$/, '}')
 }
 
 function build_repair_cost() {

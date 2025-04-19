@@ -79,7 +79,7 @@ function buildSelect(options, multiple = false) {
 /**
  * Generates a JSON array from an array
  * @param {String} argument Argument name, with `=[` or `:[`
- * @param {Array|String} value 
+ * @param {Array|String} value Value received from inputs array
  * @param {Boolean} isStr Determines is the value should be wrapped in quotes
  * @param {Boolean} canBeStr If one value is passed, determines if [] can be removed
  * @returns
