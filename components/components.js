@@ -1,3 +1,8 @@
+/**
+ * Manages building each individual component
+ * And generating its part of the command
+ */
+
 const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repair_cost', 'unbreakable', 'weapon'];
 
 function build_base_color() {
@@ -580,7 +585,6 @@ function build_weapon() {
 
 function weapon(arr) {
     let weapon = 'weapon={'
-    console.log(arr)
 
     if (arr[0] != 1 && arr[0] !== '')
         weapon += `item_damage_per_attack:${arr[0]},`
