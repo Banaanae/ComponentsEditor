@@ -4,7 +4,7 @@
         "bat_spawn_egg", "beetroot", "beetroot_seeds", "beetroot_soup", "bee_spawn_egg", "birch_boat", "birch_chest_boat", "black_dye", "blade_pottery_sherd", "blaze_powder", "blaze_rod", "blaze_spawn_egg", "blue_dye", "bogged_spawn_egg", "bolt_armor_trim", "bone",
         "bone_meal", "book", "book_and_quill", "bordure_indented_banner_pattern", "bow", "bowl", "bread", "breeze_rod", "breeze_spawn_egg", "brewer_pottery_sherd", "brick", "brown_dye", "brush", "bucket", "axolotl_block", "cod_block",
         "pufferfish_block", "salmon_block", "tadpole_block", "tropical_fish_block", "bundle", "burn_pottery_sherd", "camel_spawn_egg", "carrot", "carrot_on_a_stick", "cat_spawn_egg", "cave_spider_spawn_egg", "chainmail_boots", "chainmail_chestplate", "chainmail_helmet", "chainmail_leggings", "charcoal",
-        "cherry_boat", "cherry_chest_boat", "chest_minecart", "chicken_spawn_egg", "chorus_fruit", "clay_ball", "clock", "coal", "coast_armor_trim", "cocoa_beans", "cod_spawn_egg", "command_block_minecart", "compass", "cooked_chicken", "cooked_cod", "cooked_mutton",
+        "cherry_boat", "cherry_chest_boat", "chest_minecart", "chicken_spawn_egg", "chorus_fruit", "clay_ball", "clock", "coal", "coast_armor_trim", "cocoa_beans", "cod_spawn_egg", "command_block_minecart", "cooked_chicken", "cooked_cod", "cooked_mutton",
         "cooked_porkchop", "cooked_rabbit", "cooked_salmon", "cookie", "copper_ingot", "cow_spawn_egg", "creeper_charge_banner_pattern", "creeper_spawn_egg", "crossbow", "cyan_dye", "danger_pottery_sherd", "dark_oak_boat", "dark_oak_chest_boat", "debug_stick", "diamond", "diamond_axe",
         "diamond_boots", "diamond_chestplate", "diamond_helmet", "diamond_hoe", "diamond_horse_armor", "diamond_leggings", "diamond_pickaxe", "diamond_shovel", "diamond_sword", "disc_fragment", "dolphin_spawn_egg", "donkey_spawn_egg", "dragon_breath", "dried_kelp", "drowned_spawn_egg", "dune_armor_trim",
         "echo_shard", "egg", "elder_guardian_spawn_egg", "elytra", "emerald", "empty_map", "enchanted_book", "enchanted_golden_apple", "enderman_spawn_egg", "endermite_spawn_egg", "ender_dragon_spawn_egg", "ender_pearl", "end_crystal", "evoker_spawn_egg", "experience_bottle", "explorer_pottery_sherd",
@@ -86,6 +86,11 @@
         "white_carpet", "white_concrete", "white_concrete_powder", "white_glazed_terracotta", "white_shulker_box", "white_stained_glass", "white_stained_glass_pane", "white_terracotta", "white_tulip", "white_wool", "wither_rose", "wither_skeleton_skull", "yellow_banner", "yellow_bed", "yellow_candle", "yellow_carpet",
         "yellow_concrete", "yellow_concrete_powder", "yellow_glazed_terracotta", "yellow_shulker_box", "yellow_stained_glass", "yellow_stained_glass_pane", "yellow_terracotta", "yellow_wool", "zombie_head"
     ],
+    "compass": {
+        "custom": [
+            "lodestone_tracker"
+        ]
+    },
     "decorated_pot": {
         "custom": [
             "pot_decorations"

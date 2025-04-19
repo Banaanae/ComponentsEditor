@@ -378,6 +378,23 @@ function jukebox_playable(arr) {
     return `jukebox_playable="${arr[0]}"`
 }
 
+function build_lodestone_tracker() {
+    let details = addComponent('lodestone_tracker', ['target', 'header', "pos x", "number", "pos y", "number", "pos z", "number", "dimension", "none", "tracked", "checkbox"])
+
+    details.children[16].appendChild(buildSelect(['overworld', 'nether', 'the_end']))
+
+    return details
+}
+
+function lodestone_tracker(arr) {
+    let lodestone_tracker = `lodestone_tracker={target:{pos:[I;${arr[0]},${arr[1]},${arr[2]}],dimension:"${arr[3]}"}`
+
+    if (arr[4] === "false")
+        lodestone_tracker += ",tracked:false"
+
+    return lodestone_tracker + '}'
+}
+
 function build_lore() {
     let span = addComponent('lore', ['text', 'text', 'italic', 'checkbox', 'color', 'text'])
 
