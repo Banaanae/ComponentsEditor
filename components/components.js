@@ -91,13 +91,13 @@ function break_sound(arr) {
 function build_consumable() {
     let span = addComponent('consumable', ['consume_seconds', 'number', 'animation', 'none', 'sound', 'text', 'has_consume_particles', 'checkbox', 'on_consume_effects', 'none'])
 
-    span.children[2].step = 0.1
+    span.children[5].step = 0.1
 
     let animation = buildSelect(['none', 'eat', 'drink', 'block', 'bow', 'spear', 'crossbow', 'spyglass', 'toot_horn', 'brush'])
-    span.children[8].appendChild(animation)
+    span.children[11].appendChild(animation)
 
     let on_consume_effects = buildSelect(['apply_effects', 'remove_effects', 'clear_all_effects', 'teleport_randomly', 'play_sound'], true)
-    span.children[16].appendChild(on_consume_effects)
+    span.children[19].appendChild(on_consume_effects)
     span.appendChild(document.createElement('br'))
 
     let apply_effects = document.createElement('span')
@@ -284,9 +284,9 @@ function build_equippable() {
     let details = addComponent('equippable', ['slot', 'none', 'equip_sound', 'text', 'asset_id', 'text', 'allowed_entities', 'none',
         'dispensable', 'checkbox', 'swappable', 'checkbox', 'damage_on_hurt', 'checkbox', 'equip_on_interact', 'checkbox', 'camera_overlay', 'text'])
 
-    details.children[5].appendChild(buildSelect(['head', 'chest', 'legs', 'feet', 'body', 'mainhand', 'offhand', 'saddle']))
+    details.children[8].appendChild(buildSelect(['head', 'chest', 'legs', 'feet', 'body', 'mainhand', 'offhand', 'saddle']))
 
-    let allowed_entities_br = details.children[14]
+    let allowed_entities_br = details.children[17]
 
     let allowed_entities = document.createElement('span')
     allowed_entities.id = 'allowed_entities'
@@ -345,7 +345,7 @@ function equippable(arr) {
 function build_food() {
     let span = addComponent('food', ['nutrition', 'number', 'saturation', 'number', 'can_always_eat', 'checkbox'])
 
-    span.children[5].step = 0.1
+    span.children[8].step = 0.1
 
     return span
 }
@@ -393,7 +393,7 @@ function jukebox_playable(arr) {
 function build_lodestone_tracker() {
     let details = addComponent('lodestone_tracker', ['target', 'header', "pos x", "number", "pos y", "number", "pos z", "number", "dimension", "none", "tracked", "checkbox"])
 
-    details.children[16].appendChild(buildSelect(['overworld', 'nether', 'the_end']))
+    details.children[19].appendChild(buildSelect(['overworld', 'nether', 'the_end']))
 
     return details
 }
@@ -470,8 +470,8 @@ function max_damage(arr) {
 function build_max_stack_size() {
     let span = addComponent('max_stack_size', ['max_stack_size', 'number'])
 
-    span.children[3].min = 1
-    span.children[3].max = 99
+    span.children[6].min = 1
+    span.children[6].max = 99
 
     return span
 }
@@ -493,8 +493,8 @@ function note_block_sound(arr) {
 function build_ominous_bottle_amplifier() {
     let span = addComponent('ominous_bottle_amplifier', ['ominous_bottle_amplifier', 'number'])
 
-    span.children[2].min = 0
-    span.children[2].max = 4
+    span.children[5].min = 0
+    span.children[5].max = 4
 
     return span
 }
@@ -648,7 +648,7 @@ function unbreakable(arr) {
 function build_use_cooldown() {
     let details = addComponent('use_cooldown', ['seconds', 'number'])
 
-    details.children[5].step = 0.1
+    details.children[8].step = 0.1
 
     // TODO: cooldown_group
 
@@ -686,7 +686,7 @@ function use_remainder(arr) {
 function build_weapon() {
     let details = addComponent('weapon', ['item_damage_per_attack', 'number', 'disable_blocking_for_seconds', 'number'])
 
-    details.children[9].step = 0.1
+    details.children[12].step = 0.1
 
     return details
 }

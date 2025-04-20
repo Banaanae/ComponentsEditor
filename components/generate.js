@@ -33,8 +33,20 @@ function addComponent(name, inputsArr) {
     
     const activeLabel = document.createElement('label')
     activeLabel.innerText = 'Active'
-    activeLabel.for = useCheck.id
+    activeLabel.setAttribute('for', useCheck.id)
     span.appendChild(activeLabel)
+
+    span.appendChild(document.createElement('br'))
+
+    const removeCheck = document.createElement('input')
+    removeCheck.type = 'checkbox'
+    removeCheck.id = name + '_rc'
+    span.appendChild(removeCheck)
+    
+    const removeLabel = document.createElement('label')
+    removeLabel.innerText = 'Remove'
+    removeLabel.setAttribute('for', removeCheck.id)
+    span.appendChild(removeLabel)
 
     if (inputsArr.length % 2 !== 0)
         console.error('Malformed inputs array passed! Expected even length, got length of: ' + inputsArr.length)
@@ -82,7 +94,7 @@ function buildSelect(options, multiple = false) {
  * @param {Array|String} value Value received from inputs array
  * @param {Boolean} isStr Determines is the value should be wrapped in quotes
  * @param {Boolean} canBeStr If one value is passed, determines if [] can be removed
- * @returns
+ * @returns A minecraft formatted JSON array
  */
 function generateList(argument, value, isStr, canBeStr) {
     let removeSB = false
@@ -154,9 +166,13 @@ function generateCommand() {
     const rawComponents = componentsDiv.getElementsByTagName('details')
     for (let i = 0; i < rawComponents.length; i++) {
         compArr = spanToArr(rawComponents[i])
-        if (compArr[0] === "true" || compArr.length === 1) { // If use this checkbox is on
-            if (compArr.length !== 1)
-                compArr = compArr.splice(1)
+        if (compArr[0] === 'true') { // If use this checkbox is on
+            if (compArr[1] === 'true') { // If remove check is active
+                components += `!${rawComponents[i].id},`
+                continue
+            }
+            if (compArr.length !== 2)
+                compArr = compArr.splice(2)
             try {
                 data = window[rawComponents[i].id](compArr)
                 if (data !== '')
