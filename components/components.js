@@ -3,7 +3,7 @@
  * And generating its part of the command
  */
 
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -246,6 +246,18 @@ function build_damage() {
 
 function damage(arr) {
     return `damage=${arr[0]}`
+}
+
+function build_death_protection() {
+    let details = addComponent('death_protection', [])
+
+    // TODO: consume_effects
+
+    return details
+}
+
+function death_protection(arr) {
+    return 'death_protection={}'
 }
 
 function build_dyed_color() {
