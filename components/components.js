@@ -12,7 +12,7 @@ function build_base_color() {
 }
 
 function base_color(arr) {
-    return `base_color:"${arr[0]}"`
+    return `base_color="${arr[0]}"`
 }
 
 function build_blocks_attacks() {
