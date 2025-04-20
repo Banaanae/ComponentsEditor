@@ -648,15 +648,9 @@ function use_cooldown(arr) {
 }
 
 function build_use_remainder() {
-    let details = addComponent('use_remainder', ['id', 'text', 'components', 'text', 'count', 'number'])
+    let details = addComponent('use_remainder', [])
 
-    // TODO: Styling
-    let help = document.createElement('img')
-    help.src = '../res/help.svg'
-    help.alt = '?'
-    help.title = 'Paste in a full command'
-    help.width = 16
-    details.children[8].appendChild(help)
+    details.innerHTML += buildItemComponents()
 
     return details
 }

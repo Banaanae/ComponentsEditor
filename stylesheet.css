@@ -61,3 +61,9 @@
 .bold {
     font-weight: bold;
 }
+
+.help {
+    width: 16px;
+    vertical-align: middle;
+    padding-right: 0.5%;
+}

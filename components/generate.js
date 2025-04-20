@@ -119,6 +119,23 @@ function generateList(argument, value, isStr, canBeStr) {
     return argument
 }
 
+function buildItemComponents() {
+    let itemComponents = addComponent('temp', ['id', 'text', 'components', 'text', 'count', 'number'])
+
+    let help = document.createElement('img')
+    help.src = '../res/help.svg'
+    help.alt = '?'
+    help.title = 'Paste in a full command'
+    help.classList.add('help')
+    itemComponents.children[8].appendChild(help)
+
+    for (let i = 0; i < 4; i++) {
+        itemComponents.removeChild(itemComponents.firstChild)
+    }
+
+    return itemComponents.innerHTML 
+}
+
 // End builder funcs
 // Begin generator funcs
 
