@@ -365,9 +365,7 @@ function build_glider() {
 }
 
 function glider(arr) {
-    if (arr[0] === 'true')
-        return 'glider={}'
-    return ''
+    return 'glider={}'
 }
 
 function build_intangible_projectile() {
@@ -685,9 +683,7 @@ function build_unbreakable() {
 }
 
 function unbreakable(arr) {
-    if (arr[0] === 'true')
-        return 'unbreakable={}'
-    return ''
+    return 'unbreakable={}'
 }
 
 function build_use_cooldown() {
