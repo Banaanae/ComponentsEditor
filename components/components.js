@@ -503,6 +503,41 @@ function ominous_bottle_amplifier(arr) {
     return `ominous_bottle_amplifier=${arr[0]}`
 }
 
+function build_potion_contents() {
+    let details = addComponent('potion_contents', ['potion', 'text', 'custom_color', 'color', 'custom_name', 'text'])
+
+    // TODO: custom_effects
+
+    return details
+}
+
+function potion_contents(arr) {
+    let potion_contents = 'potion_contents={'
+
+    if (arr[0] !== '')
+        potion_contents += `potion:${arr[0]},`
+
+    // TODO: No override option
+    potion_contents += `custom_color:${arr[1]},`
+
+    if (arr[2] !== '')
+        potion_contents += `custom_name:${arr[0]},`
+
+    return potion_contents.replace(/,$/, '}')
+}
+
+function build_potion_duration_scale() {
+    let details = addComponent('potion_duration_scale', ['potion_duration_scale', 'number'])
+
+    details.children[9].step = 0.1
+
+    return details
+}
+
+function potion_duration_scale(arr) {
+    return `potion_duration_scale=${arr[0]}`
+}
+
 function build_pot_decorations() {
     let details = addComponent('pot_decorations', ['sherd 1', 'text', 'sherd 2', 'text', 'sherd 3', 'text', 'sherd 4', 'text'])
 
