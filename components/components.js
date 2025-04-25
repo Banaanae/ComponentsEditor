@@ -96,87 +96,14 @@ function build_consumable() {
     let animation = buildSelect(['none', 'eat', 'drink', 'block', 'bow', 'spear', 'crossbow', 'spyglass', 'toot_horn', 'brush'])
     span.children[11].appendChild(animation)
 
-    let on_consume_effects = buildSelect(['apply_effects', 'remove_effects', 'clear_all_effects', 'teleport_randomly', 'play_sound'], true)
-    span.children[19].appendChild(on_consume_effects)
-    span.appendChild(document.createElement('br'))
-
-    let apply_effects = document.createElement('span')
-    apply_effects.style.display = 'none'
-    let apply_effects_header = document.createElement('span')
-    apply_effects_header.innerText = 'effects: '
-    apply_effects.appendChild(apply_effects_header)
-    span.appendChild(apply_effects)
-
-    let remove_effects = document.createElement('span')
-    remove_effects.style.display = 'none'
-    let remove_effects_header = document.createElement('span')
-    remove_effects_header.innerText = 'remove effects: '
-    remove_effects.appendChild(remove_effects_header)
-    let wrapper = document.createElement('span')
-    remove_effects.appendChild(wrapper)
-
-    let firstEffect = document.createElement('input')
-    firstEffect.type = 'text'
-    wrapper.appendChild(firstEffect)
-
-    let pBtn = document.createElement('button')
-    pBtn.innerText = '+'
-    pBtn.addEventListener('click', function () {
-        let input = document.createElement('input')
-        wrapper.appendChild(input)
-    })
-
-    let mBtn = document.createElement('button')
-    mBtn.innerText = '-'
-    mBtn.addEventListener('click', function () {
-        if (document.querySelectorAll('#consumable > span:nth-child(9) > span > input:last-child').length !== 1)
-            document.querySelector('#consumable > span:nth-child(9) > span > input:last-child').remove()
-    })
-
-    remove_effects.appendChild(wrapper)
-    remove_effects.appendChild(pBtn)
-    remove_effects.appendChild(mBtn)
-    span.appendChild(remove_effects)
-    span.appendChild(document.createElement('br'))
-
-    let clear_all_effects = document.createElement('span')
-    clear_all_effects.style.display = 'none'
-    span.appendChild(clear_all_effects)
-    span.appendChild(document.createElement('br'))
-
-    let teleport_randomly = document.createElement('span')
-    teleport_randomly.style.display = 'none'
-    let teleport_randomly_header = document.createElement('span')
-    teleport_randomly_header.innerText = 'diameter: '
-    teleport_randomly.appendChild(teleport_randomly_header)
-    let diameter = document.createElement('input')
-    diameter.type = 'number'
-    diameter.step = '0.1'
-    teleport_randomly.appendChild(diameter)
-    span.appendChild(teleport_randomly)
-    span.appendChild(document.createElement('br'))
-
-    let play_sound = document.createElement('span')
-    play_sound.style.display = 'none'
-    let play_sound_header = document.createElement('span')
-    play_sound_header.innerText = 'play_sound: '
-    play_sound.appendChild(play_sound_header)
-    let sound2 = document.createElement('input')
-    sound2.type = 'text'
-    play_sound.appendChild(sound2)
-    span.appendChild(play_sound)
-
-
-    on_consume_effects.addEventListener('change', function () {
-        for (let i = 0; i < on_consume_effects.length; i++) {
-            document.querySelector('#consumable > span:nth-of-type(' + (i + 6) + ')').style.display = (on_consume_effects[i].selected) ? 'inline' : 'none'
-        }
-    })
+    span.append(buildConsumeEffects())
 
     return span
 }
 
 function consumable(arr) {
+    arr = arr.concat(arr[4])
+    arr.splice(3, 1)
     let component = 'consumable={'
 
     if (arr[0] !== 1.6)
@@ -198,7 +125,10 @@ function consumable(arr) {
     }
 
     if (arr[4].remove_effects) {
-        // TODO
+        let remove_effects = generateList('{type:"remove_effects",remove:[', arr[arr.length - 3], true, true)
+        if (remove_effects !== '')
+            remove_effects += "},"
+        consumeFX += remove_effects
     }
 
     if (arr[4].clear_all_effects)
