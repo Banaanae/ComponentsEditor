@@ -3,7 +3,7 @@
  * And generating its part of the command
  */
 
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -520,6 +520,16 @@ function build_profile() {
 
 function profile(arr) {
     return `profile=${arr[0]}`
+}
+
+function build_provides_banner_patterns() {
+    let details = addComponent('provides_banner_patterns', ['provides_banner_patterns', 'text'])
+
+    return details
+}
+
+function provides_banner_patterns(arr) {
+    return `provides_banner_patterns="${arr[0]}"`
 }
 
 function build_rarity() {
