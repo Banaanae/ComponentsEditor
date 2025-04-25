@@ -3,7 +3,7 @@
  * And generating its part of the command
  */
 
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -316,6 +316,26 @@ function build_item_model() {
 
 function item_model(arr) {
     return `item_model="${arr[0]}"`
+}
+
+function build_item_name() {
+    let span = addComponent('item_name', ['text', 'text', 'color', 'text', 'italic', 'checkbox'])
+
+    return span
+}
+
+function item_name(arr) {
+    let component = "item_name=";
+    component += '{text:"' + arr[0] + '"'
+    
+    if (arr[1] !== "")
+        component += ',color:"' + arr[1] + '"'
+    
+    if (arr[2] !== 'false')
+        component += ',italic:true'
+    component += '}'
+
+    return component
 }
 
 function build_jukebox_playable() {
