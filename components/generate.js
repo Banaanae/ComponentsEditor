@@ -135,7 +135,7 @@ function buildItemComponents() {
     let itemComponents = addComponent('temp', ['id', 'text', 'components', 'text', 'count', 'number'])
 
     let help = document.createElement('img')
-    help.src = '../res/help.svg'
+    help.src = './res/help.svg'
     help.alt = '?'
     help.title = 'Paste in a full command'
     help.classList.add('help')
