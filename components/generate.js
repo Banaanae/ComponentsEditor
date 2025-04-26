@@ -141,7 +141,7 @@ function buildItemComponents() {
     help.classList.add('help')
     itemComponents.children[8].appendChild(help)
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 7; i++) {
         itemComponents.removeChild(itemComponents.firstChild)
     }
 
