@@ -14,14 +14,16 @@
                 <div id="editor">
                     <div id="components"></div>
                     <button id="generate">Generate Command</button>
-                    <input type="text" placeholder="Command goes here" id="command">
-                    <!-- TODO: Can we use /data to split this command -->
-                    <p class="Warning256">Command is over 256 characters and will need to be entered via command block</p>
+                    <input id="command_block" type="checkbox"><label for="command_block">Use Command Block</label>
+                    <textarea placeholder="Command(s) goes here" id="command"></textarea>
+                    <p class="Warning256">Command could not be split into 256 character commands, this usually occurs when a single component exceeds 178 characters (due to limitations appending components), please use a command block instead</p>
+                    <br>
+                    <p class="CommandMultiple">Hold the item given in the first command for the rest of the command(s) to work</p>
                 </div>
             </div>
             <h2>How to use</h2>
             <ol>
-                <li>Enter the item you want to create in thesearch box above</li>
+                <li>Enter the item you want to create in the search box above</li>
                 <li>On the right side, click on the component's of the item you want to edit, you can click the Minecraft wiki reference for more information on each component</li>
                 <ul>
                     <li>Ticking the "Active" checkbox makes the component get added to the command</li>

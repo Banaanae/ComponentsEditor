@@ -42,11 +42,16 @@
 }
 
 #command {
-    width: 25%;
+    display: block;
+    width: 100%;
     min-width: 200px;
 }
 
 .Warning256 {
+    display: none;
+}
+
+.CommandMultiple {
     display: none;
 }
 

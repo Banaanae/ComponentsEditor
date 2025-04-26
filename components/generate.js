@@ -247,12 +247,13 @@ function generateCommand() {
 
     let compArr;
     let data;
+    let dataArr = []
     const rawComponents = componentsDiv.getElementsByTagName('details')
     for (let i = 0; i < rawComponents.length; i++) {
         compArr = spanToArr(rawComponents[i])
         if (compArr[0] === 'true') { // If use this checkbox is on
             if (compArr[1] === 'true') { // If remove check is active
-                components += `!${rawComponents[i].id},`
+                dataArr.push(`!${rawComponents[i].id}`)
                 continue
             }
             if (compArr.length !== 2)
@@ -260,7 +261,7 @@ function generateCommand() {
             try {
                 data = window[rawComponents[i].id](compArr)
                 if (data !== '')
-                    components += data + ','
+                    dataArr.push(data)
             } catch {
                 if (window.hasOwnProperty(rawComponents[i].id))
                     window[rawComponents[i].id](compArr) // Log error normally
@@ -271,13 +272,75 @@ function generateCommand() {
         }
     }
 
+    dataArr.forEach(comp => {
+        components += comp + ','
+    })
     if (components !== '')
         components = '[' + components + ']'
-    commandBox.value = command + components.replace(/,+\]$/, ']')
-    if (commandBox.value.length > 256) // TODO: Make this event listener
-        document.querySelector('.Warning256').style.display = 'inline'
+
+    let unsplitCommand = command + components.replace(/,+\]$/, ']')
+
+    document.querySelector('.CommandMultiple').style.display = 'none'
+    document.querySelector('.Warning256').style.display = 'none'
+
+    if (unsplitCommand.length > 256 && !document.getElementById('command_block').checked)
+        commandBox.value = splitCommand(command, dataArr)
     else
-        document.querySelector('.Warning256').style.display = 'none'
+        commandBox.value = unsplitCommand
+    commandBox.style.height = commandBox.scrollHeight + 'px'
+}
+
+/**
+ * Converts a command over 256 characters into multiple commands
+ * under 256 characters for usage in chat
+ * @param {String} command The /give part of the command
+ * @param {Array.<String>} components An array of passed components
+ * @returns One /give and multiple /item commands
+ */
+function splitCommand(command, components) {
+    let commands;
+    components.sort((a, b) => a.length - b.length) // Sort by length
+
+    let length = command.length
+    let safeCommand = '[' // First fit as much as we can in /give
+    let i = 0
+    while (i < components.length) {
+        let tempCommand = safeCommand + components[i] + ','
+        if ((length + tempCommand.length) <= 256) {
+            safeCommand += components[i] + ','
+            i++
+        } else break
+    }
+    components = components.slice(i)
+    commands = command + safeCommand.replace(/,$/, ']\n')
+    commands.replace(/\[$/, '')
+
+    let newHead = '/item modify entity @p weapon.mainhand {function:set_components,components:{'
+    let exceeding = false
+    length = newHead.length
+    while (components.length !== 0) {
+        let i = 0
+        if (components[0].length > 178) {
+            exceeding = true
+            break
+        }
+        safeCommand = ''
+        while (i < components.length) {
+            let tempCommand = safeCommand + components[i] + ','
+            if ((length + tempCommand.length) <= 256) {
+                safeCommand += components[i].replace('=', ':') + ','
+                i++
+            } else break        
+        }
+        components = components.slice(i)
+        commands += newHead + safeCommand.replace(/,$/, '}}\n')
+    }
+
+    if (exceeding)
+        document.querySelector('.Warning256').style.display = 'inline'
+
+    document.querySelector('.CommandMultiple').style.display = 'inline'
+    return commands
 }
 
 /**
