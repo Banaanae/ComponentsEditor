@@ -633,7 +633,7 @@ function build_repair_cost() {
 }
 
 function repair_cost(arr) {
-    return `repair_cost:${arr[0]}`
+    return `repair_cost=${arr[0]}`
 }
 
 function build_unbreakable() {
