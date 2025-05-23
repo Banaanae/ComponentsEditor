@@ -287,7 +287,7 @@ function generateCommand() {
         commandBox.value = splitCommand(command, dataArr)
     else
         commandBox.value = unsplitCommand
-    commandBox.style.height = commandBox.scrollHeight + 'px'
+    commandBox.style.height = (commandBox.scrollHeight - 4) + 'px'
 }
 
 /**
