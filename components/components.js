@@ -3,7 +3,7 @@
  * And generating its part of the command
  */
 
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -634,6 +634,29 @@ function build_repair_cost() {
 
 function repair_cost(arr) {
     return `repair_cost=${arr[0]}`
+}
+
+function build_tool() {
+    let details = addComponent('tool', ['default_mining_speed', 'number', 'damage_per_block', 'number', 'can_destroy_blocks_in_creative', 'checkbox'])
+    // TODO: Rules
+    details.children[9].step = 0.1
+
+    return details
+}
+
+function tool(arr) {
+    let tool = 'tool={'
+
+    if (arr[0] != 1)
+        tool += `default_mining_speed:${arr[0]},`
+
+    if (arr[1] !== '1')
+        tool += `damage_per_block:${arr[1]},`
+
+    if (arr[2] === 'false')
+        tool += 'can_destroy_blocks_in_creative:false'
+    
+    return tool.replace(/,$/, '') + '}'
 }
 
 function build_unbreakable() {
