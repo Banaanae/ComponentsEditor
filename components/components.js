@@ -105,7 +105,7 @@ function consumable(arr) {
     console.log(arr)
     let component = 'consumable={'
 
-    if (arr[0] !== 1.6)
+    if (arr[0] !== 1.6 && arr[0] !== '')
         component += `consume_seconds:${arr[0]},`
 
     if (arr[1] !== 'eat')
@@ -230,16 +230,16 @@ function equippable(arr) {
 
     equippable += generateList('allowed_entities:[', arr[3], true, true)
 
-    if (arr[4] !== 'true' && arr[4] !== '')
+    if (arr[4] !== 'true')
         equippable += `dispensable:false,`
 
-    if (arr[5] !== 'true' && arr[4] !== '')
+    if (arr[5] !== 'true')
         equippable += `swappable:false,`
 
-    if (arr[6] !== 'true' && arr[4] !== '')
+    if (arr[6] !== 'true')
         equippable += `damage_on_hurt:false,`
 
-    if (arr[7] !== 'true' && arr[4] !== '')
+    if (arr[7] !== 'true')
         equippable += `equip_on_interact:false,`
     
     if (arr[8] !== '')
@@ -670,7 +670,7 @@ function tool(arr) {
     if (arr[0] != 1)
         tool += `default_mining_speed:${arr[0]},`
 
-    if (arr[1] !== '1')
+    if (arr[1] !== '1' && arr[1] !== '')
         tool += `damage_per_block:${arr[1]},`
 
     if (arr[2] === 'false')
