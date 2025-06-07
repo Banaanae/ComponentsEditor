@@ -401,7 +401,13 @@ function getDataFromElement(element) {
             return element.value
         }
         case 'span': return spanToArr(element)
-        default: console.warn('Unhandled param type: ' + type); return 'pop'
+        default: console.warn('Unhandled param type: ' + type); // If element isn't know log it (solely for when I add features and forget)
+        case 'p': // Don't warn for elements that can't be handled
+        case 'label':
+        case 'br':
+        case 'button':
+        case 'img':
+        case 'summary': return 'pop'
     }
 }
 
