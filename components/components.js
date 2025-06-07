@@ -208,7 +208,7 @@ function build_equippable() {
     let mBtn = document.createElement('button')
     mBtn.innerText = '-'
     mBtn.addEventListener('click', function () {
-        if (document.querySelectorAll('#allowed_entities > input:last-child').length !== 1)
+        if (document.querySelectorAll('#allowed_entities > input').length !== 1)
             document.querySelector('#allowed_entities > input:last-child').remove()
     })
 
