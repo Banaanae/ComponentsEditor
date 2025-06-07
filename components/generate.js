@@ -232,6 +232,38 @@ function buildConsumeEffects() {
     return span
 }
 
+function generateConsumeEffects(arr) {
+    let consumeFX = 'on_consume_effects:['
+
+    if (arr[0].apply_effects) {
+        // TODO
+    }
+
+    if (arr[0].remove_effects) {
+        let remove_effects = generateList('{type:"remove_effects",remove:[', arr[arr.length - 3], true, true)
+        if (remove_effects !== '')
+            remove_effects += "},"
+        consumeFX += remove_effects
+    }
+
+    if (arr[0].clear_all_effects)
+        consumeFX += '{type:"minecraft:clear_all_effects"},'
+
+    if (arr[0].teleport_randomly) {
+        consumeFX += `{type:"minecraft:teleport_randomly",`
+        if (arr[arr.length - 2] !== 16)
+            consumeFX += `diameter:${arr[arr.length - 2]}},`
+    }
+
+    if (arr[0].play_sound)
+        consumeFX += `{type:"minecraft:play_sound",sound:"${arr[arr.length - 1]}"},`
+
+    if (consumeFX === 'on_consume_effects:[')
+        return ''
+
+    return consumeFX
+}
+
 // End builder funcs
 // Begin generator funcs
 

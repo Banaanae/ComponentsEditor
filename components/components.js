@@ -102,8 +102,7 @@ function build_consumable() {
 }
 
 function consumable(arr) {
-    arr = arr.concat(arr[4])
-    arr.splice(3, 1)
+    console.log(arr)
     let component = 'consumable={'
 
     if (arr[0] !== 1.6)
@@ -118,33 +117,10 @@ function consumable(arr) {
     if (arr[3] !== 'true')
         component += 'has_consume_particles:false,'
 
-    let consumeFX = 'on_consume_effects:['
+    let consumeFX = generateConsumeEffects(arr[4])
+    if (consumeFX !== '')
+        component += consumeFX
 
-    if (arr[4].apply_effects) {
-        // TODO
-    }
-
-    if (arr[4].remove_effects) {
-        let remove_effects = generateList('{type:"remove_effects",remove:[', arr[arr.length - 3], true, true)
-        if (remove_effects !== '')
-            remove_effects += "},"
-        consumeFX += remove_effects
-    }
-
-    if (arr[4].clear_all_effects)
-        consumeFX += '{type:"minecraft:clear_all_effects"},'
-
-    if (arr[4].teleport_randomly) {
-        consumeFX += `{type:"minecraft:teleport_randomly",`
-        if (arr[arr.length - 2] !== 16)
-            consumeFX += `diameter:${arr[arr.length - 2]}},`
-    }
-
-    if (arr[4].play_sound)
-        consumeFX += `{type:"minecraft:play_sound",sound:"${arr[arr.length - 1]}"},`
-
-    if (consumeFX !== 'on_consume_effects:[')
-        return component + consumeFX.replace(/,$/, ']}')
     return component.replace(/,$/, '}')
 }
 
