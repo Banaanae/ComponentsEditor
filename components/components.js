@@ -342,28 +342,72 @@ function lodestone_tracker(arr) {
 }
 
 function build_lore() {
-    let span = addComponent('lore', ['text', 'text', 'italic', 'checkbox', 'color', 'text'])
+    let span = addComponent('lore', ['Line 1', 'none','text', 'text', 'italic', 'checkbox', 'color', 'text'])
 
-    // TODO: +/- Line
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        let wrapper = document.createElement('span')
+        let textP = document.createElement('span')
+        textP.innerText = 'text: '
+        wrapper.appendChild(textP)
+        let text = document.createElement('input')
+        wrapper.appendChild(text)
+        wrapper.appendChild(document.createElement('br'))
+
+        let italicP = document.createElement('span')
+        italicP.innerText = 'italic: '
+        wrapper.appendChild(italicP)
+        let italic = document.createElement('input')
+        italic.type = 'checkbox'
+        wrapper.appendChild(italic)
+        wrapper.appendChild(document.createElement('br'))
+
+        let colorP = document.createElement('span')
+        colorP.innerText = 'color: '
+        wrapper.appendChild(colorP)
+        let color = document.createElement('input')
+        wrapper.appendChild(color)
+        wrapper.appendChild(document.createElement('br'))
+
+        span.appendChild(wrapper)
+    })
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        if (document.querySelectorAll('#lore > span').length !== 4)
+            document.querySelector('#lore > span:last-child').remove()
+    })
+
+    span.appendChild(pBtn) // TODO: Move to better spot
+    span.appendChild(mBtn)
+    span.appendChild(document.createElement('br'))
+
     return span
 }
 
 function lore(arr) {
+    // Convert all of the sub-arrays into 1 array
+    let fixedArr = arr.splice(0,3)
+    arr.forEach(subarray => {
+        fixedArr = fixedArr.concat(subarray)
+    });
     let component = "lore=[";
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < fixedArr.length; i++) {
         switch (i % 3) {
             case 0: { // Text
-                component += '{text:"' + arr[i] + '"'
+                component += '{text:"' + fixedArr[i] + '"'
                 break
             }
             case 1: { // Italic
-                if (arr[i] === 'false')
+                if (fixedArr[i] === 'false')
                     component += ',italic:false'
                 break
             }
             case 2: { // Colour
-                if (arr[i] !== 'dark_purple' && arr[i] !== '')
-                    component += ',color:' + arr[i]
+                if (fixedArr[i] !== 'dark_purple' && fixedArr[i] !== '')
+                    component += ',color:' + fixedArr[i]
                 component += '},'
             }
         }
