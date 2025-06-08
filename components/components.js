@@ -765,6 +765,69 @@ function repair_cost(arr) {
     return `repair_cost=${arr[0]}`
 }
 
+function build_suspicious_stew_effects() {
+    let details = addComponent('suspicious_stew_effects', ['id', 'text', 'duration', 'number'])
+
+    let wrapper = document.createElement('span')
+
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        let wrapper = document.createElement('span')
+        let idText = document.createElement('span')
+        idText.innerText = 'id: '
+        wrapper.appendChild(idText)
+        let id = document.createElement('input')
+        wrapper.appendChild(id)
+        wrapper.appendChild(document.createElement('br'))
+
+        let durationText = document.createElement('span')
+        durationText.innerText = 'duration: '
+        wrapper.appendChild(durationText)
+        let duration = document.createElement('input')
+        duration.type = 'number'
+        wrapper.appendChild(duration)
+        wrapper.appendChild(document.createElement('br'))
+
+        details.appendChild(wrapper)
+    })
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        if (document.querySelectorAll('#suspicious_stew_effects > span').length !== 2)
+            document.querySelector('#suspicious_stew_effects > span:last-child').remove()
+    })
+
+    details.appendChild(pBtn) // TODO: Move to better spot
+    details.appendChild(mBtn)
+    details.appendChild(document.createElement('br'))
+
+    return details
+}
+
+function suspicious_stew_effects(arr) {
+    let component = 'suspicious_stew_effects=['
+
+    arr[1] = [arr[0], arr[1]]
+    arr.shift()
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i][0] !== '') {
+            component += `{id:"${arr[i][0]}"`
+            if (arr[i][1] !== '' && arr[i][1] !== '160')
+                component += `,duration:${arr[i][1]}},`
+            else
+                component += '},'
+        }
+    }
+
+    component = component.replace(/,$/, ']')
+    if (component === 'suspicious_stew_effects=[')
+        return ''
+    return component
+}
+
 function build_tool() {
     let details = addComponent('tool', ['default_mining_speed', 'number', 'damage_per_block', 'number', 'can_destroy_blocks_in_creative', 'checkbox'])
     // TODO: Rules

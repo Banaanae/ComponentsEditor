@@ -23,7 +23,7 @@
         "raw_rabbit", "raw_salmon", "recovery_compass", "redstone_dust", "red_dye", "rib_armor_trim", "rotten_flesh", "saddle", "salmon_spawn_egg", "scrape_pottery_sherd", "scute", "sentry_armor_trim", "shaper_armor_trim", "sheaf_pottery_sherd", "shears", "sheep_spawn_egg",
         "shelter_pottery_sherd", "shulker_shell", "shulker_spawn_egg", "silence_armor_trim", "silverfish_spawn_egg", "skeleton_horse_spawn_egg", "skeleton_spawn_egg", "skull_charge_banner_pattern", "skull_pottery_sherd", "slimeball", "slime_spawn_egg", "sniffer_spawn_egg", "snort_pottery_sherd", "snout_banner_pattern", "snowball",
         "snow_golem_spawn_egg", "spectral_arrow", "spider_eye", "spider_spawn_egg", "spire_armor_trim", "spruce_boat", "spruce_chest_boat", "spyglass", "squid_spawn_egg", "steak", "stick", "stone_axe", "stone_hoe", "stone_pickaxe", "stone_shovel",
-        "stone_sword", "stray_spawn_egg", "strider_spawn_egg", "string", "sugar", "suspicious_stew", "sweet_berries", "tadpole_spawn_egg", "thing_banner_pattern", "tide_armor_trim", "tipped_arrow", "tnt_minecart", "torchflower_seeds", "totem_of_undying", "trader_llama_spawn_egg", "trial_key",
+        "stone_sword", "stray_spawn_egg", "strider_spawn_egg", "string", "sugar", "sweet_berries", "tadpole_spawn_egg", "thing_banner_pattern", "tide_armor_trim", "tipped_arrow", "tnt_minecart", "torchflower_seeds", "totem_of_undying", "trader_llama_spawn_egg", "trial_key",
         "trident", "tropical_fish", "tropical_fish_spawn_egg", "turtle_shell", "turtle_spawn_egg", "vex_armor_trim", "vex_spawn_egg", "villager_spawn_egg", "vindicator_spawn_egg", "wandering_trader_spawn_egg", "warden_spawn_egg", "ward_armor_trim", "warped_fungus_on_a_stick", "wayfinder_armor_trim", "wheat", "wheat_seeds",
         "white_dye", "wild_armor_trim", "wind_charge", "witch_spawn_egg", "wither_skeleton_spawn_egg", "wither_spawn_egg", "wolf_spawn_egg", "wooden_axe", "wooden_hoe", "wooden_pickaxe", "wooden_shovel", "wooden_sword", "written_book", "yellow_dye", "zoglin_spawn_egg",
         "zombie_horse_spawn_egg", "zombie_spawn_egg", "zombie_villager_spawn_egg", "zombified_piglin_spawn_egg", "", "acacia_button", "acacia_door", "acacia_fence", "acacia_fence_gate", "acacia_hanging_sign", "acacia_leaves", "acacia_log", "acacia_planks", "acacia_pressure_plate", "acacia_sapling", "acacia_sign",
@@ -159,6 +159,11 @@
         "custom": [
             "potion_contents",
             "potion_duration_scale"
+        ]
+    },
+    "suspicious_stew": {
+        "custom": [
+            "suspicious_stew_effects"
         ]
     },
     "wolf_armor": {
