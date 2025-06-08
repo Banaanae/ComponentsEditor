@@ -131,21 +131,43 @@ function generateList(argument, value, isStr, canBeStr) {
     return argument
 }
 
-function buildItemComponents() {
-    let itemComponents = addComponent('temp', ['id', 'text', 'components', 'text', 'count', 'number'])
+/**
+ * Builds a component input
+ * @param {Boolean} justComponents Whether just component input or item input (name, count, components)
+ * @returns Inputs for above
+ */
+function buildItemComponents(justComponents) {
+    let arr = ['id', 'text', 'count', 'number', 'components', 'text']
+    if (justComponents)
+        arr.splice(0, 4)
+    let itemComponents = addComponent('temp', arr)
 
     let help = document.createElement('img')
     help.src = './res/help.svg'
     help.alt = '?'
     help.title = 'Paste in a full command'
     help.classList.add('help')
-    itemComponents.children[8].appendChild(help)
+    itemComponents.children[(justComponents ? 8 : 14)].appendChild(help)
 
     for (let i = 0; i < 7; i++) {
         itemComponents.removeChild(itemComponents.firstChild)
     }
 
     return itemComponents.innerHTML 
+}
+
+/**
+ * Convert components in command form to argument form
+ * @param {string} command A full command in the format given by the generator
+ * @returns Components formatted to work in a command
+ */
+function generateComponents(command) {
+    let components = command.replace(/.*?\[(.*)\].*/, '$1') // Extract components
+    components = components.replaceAll(/((\{|\[|,)\w+)=/g, '$1:') // Convert to arg form // TODO: Will replace strings if formatted to match regex
+    components = `components:{${components}},`
+    if (components === 'components:{},')
+        return ''
+    return components
 }
 
 function buildConsumeEffects() {

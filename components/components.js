@@ -3,7 +3,8 @@
  * And generating its part of the command
  */
 
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+// TODO: Move lock to containers
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -339,6 +340,114 @@ function lodestone_tracker(arr) {
         lodestone_tracker += ",tracked:false"
 
     return lodestone_tracker + '}'
+}
+
+function build_lock() {
+    let details = addComponent('lock', ['items', 'none', 'count', 'header'])
+
+    let items_br = details.children[9]
+
+    let items = document.createElement('span')
+    items.id = 'lock_items'
+    items.appendChild(document.createElement('input'))
+
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        items.appendChild(document.createElement('input'))
+    })
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        if (document.querySelectorAll('#lock_items > input').length !== 1)
+            document.querySelector('#lock_items > input:last-child').remove()
+    })
+
+    details.insertBefore(items, items_br)
+    details.insertBefore(pBtn, items_br)
+    details.insertBefore(mBtn, items_br)
+
+    // <input type="radio" id="exact" name="count"><span> count: </span><input type="number"><br>
+    // <input type="radio" id="minmax" name="count"><span> min: </span><input type="number"><span> max:</span><input type="number">
+    details.appendChild(document.createElement('br'))
+    let exact = document.createElement('input')
+    exact.type = 'checkbox'
+    exact.id   = 'exact'
+    exact.name = 'count'
+    exact.addEventListener('click', function () {
+        if (exact.checked && minmax.checked)
+            minmax.checked = false
+    })
+    details.appendChild(exact)
+
+    let countSpan = document.createElement('span')
+    countSpan.innerText = ' count: '
+    details.appendChild(countSpan)
+
+    let exactNum = document.createElement('input')
+    exactNum.type = 'number'
+    details.appendChild(exactNum)
+    details.appendChild(document.createElement('br'))
+
+    let minmax = document.createElement('input')
+    minmax.type = 'checkbox'
+    minmax.id   = 'minmax'
+    minmax.name = 'count'
+    minmax.addEventListener('click', function () {
+        if (exact.checked && minmax.checked)
+            exact.checked = false
+    })
+    details.appendChild(minmax)
+
+    let minSpan = document.createElement('span')
+    minSpan.innerText = ' min: '
+    details.appendChild(minSpan)
+
+    let min = document.createElement('input')
+    min.type = 'number'
+    details.appendChild(min)
+
+    let maxSpan = document.createElement('span')
+    maxSpan.innerText = ' max: '
+    details.appendChild(maxSpan)
+
+    let max = document.createElement('input')
+    max.type = 'number'
+    details.appendChild(max)
+    
+
+    details.insertAdjacentHTML('beforeend', buildItemComponents(true));
+
+
+    // TODO: count
+    //       probably need radio to force user to choose one
+    // TODO: predicates
+
+    return details
+}
+
+function lock(arr) {
+    let lock = 'lock={'
+
+    lock += generateList('items:[', arr[0], true, true)
+
+    if (arr[1] === "true") { // exact
+        if (arr[2] !== '')
+            lock += `count:${arr[2]},`
+    } else { // minmax
+        let count = 'count:{'
+        if (arr[4] !== '')
+            count += `min:${arr[4]},`
+        if (arr[5] !== '')
+            count += `max:${arr[5]},`
+        if (count !== 'count:{')
+            lock += count.replace(/,$/, '},')
+    }
+
+    lock += generateComponents(arr[6])
+
+    return lock.replace(/,$/, '') + '}'
 }
 
 function build_lore() {
@@ -706,25 +815,20 @@ function use_cooldown(arr) {
 function build_use_remainder() {
     let details = addComponent('use_remainder', [])
 
-    details.innerHTML += buildItemComponents()
+    details.innerHTML += buildItemComponents(false)
 
     return details
 }
 
 function use_remainder(arr) {
-    let use_remainder = `use_remainder={id:"${arr[0]}"`
+    let use_remainder = `use_remainder={id:"${arr[0]}",`
 
-    if (arr[1] !== '') {
-        // Convert components in command form to argument form
-        components = arr[1].replace(/.*?\[(.*)\].*/, '$1') // Extract components
-        components = components.replaceAll(/((\{|\[|,)\w+)=/g, '$1:') // Convert to arg form // TODO: Will replace strings if formatted to match regex
-        use_remainder += `,components:{${components}}`
-    }
+    if (arr[1] !== '1' && arr[1] !== '')
+        use_remainder += `count:${arr[1]},`
 
-    if (arr[2] !== '1' && arr[2] !== '')
-        use_remainder += ',count:' + arr[2]
+    use_remainder += generateComponents(arr[2])
 
-    return use_remainder + '}'
+    return use_remainder.replace(/,$/, '') + '}'
 }
 
 function build_weapon() {
