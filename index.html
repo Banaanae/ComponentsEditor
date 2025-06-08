@@ -28,9 +28,14 @@
                 <ul>
                     <li>Ticking the "Active" checkbox makes the component get added to the command</li>
                     <li>Ticking the "Remove" checkbox removes that component (if default behaviour) from the item</li>
-                    <li>All component's inputs are the same as found in the wiki, if not there will be a <img src="./res/help.svg" width="16" class="help" /> symbol which will give more information when hovered</li>
+                    <li>All component's inputs are the same as found in the wiki, if not there will be a <img src="./res/help.svg" width="16" class="help" title="Help will look like this" /> symbol which will give more information when hovered</li>
                 </ul>
-                <li>Click generate command to use in Minecraft, note that commands longer than 256 characters need to be entered via command block</li>
+                <li>Click generate command to use in Minecraft</li>
+                <ul>
+                    <li>Note: Commands longer than 256 characters must be entered via command block.</li>
+                    <li>The generator will attempt to split the command, but this can fail in some cases.</li>
+                    <li>If the splitting fails, or you prefer one command, ticking the "Use Command Box" checkbox will generate a single command.</li>
+                </ul>
             </ol>
         </div>
         <div class="edit"></div>
