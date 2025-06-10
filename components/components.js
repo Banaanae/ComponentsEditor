@@ -4,7 +4,7 @@
  */
 
 // TODO: Move lock to containers
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'enchantments', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'stored_enchantments', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -185,6 +185,63 @@ function build_enchantment_glint_override() {
 
 function enchantment_glint_override(arr) {
     return `enchantment_glint_override=${arr[0]}`
+}
+
+function build_enchantments() {
+    let details = addComponent('enchantments', [])
+
+    details.appendChild(document.createElement('br'))
+
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        let wrapper = document.createElement('span')
+        let enchantmentText = document.createElement('span')
+        enchantmentText.innerText = 'enchantment: '
+        wrapper.appendChild(enchantmentText)
+        let enchantment = document.createElement('input')
+        wrapper.appendChild(enchantment)
+        wrapper.appendChild(document.createElement('br'))
+
+        let levelText = document.createElement('span')
+        levelText.innerText = 'level: '
+        wrapper.appendChild(levelText)
+        let level = document.createElement('input')
+        level.type = 'number'
+        level.min = 1
+        level.max = 255
+        wrapper.appendChild(level)
+        wrapper.appendChild(document.createElement('br'))
+
+        details.appendChild(wrapper)
+    })
+    pBtn.click()
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        if (document.querySelectorAll('#enchantments > span').length !== 1)
+            document.querySelector('#enchantments > span:last-child').remove()
+    })
+
+    details.appendChild(pBtn) // TODO: Move to better spot
+    details.appendChild(mBtn)
+    details.appendChild(document.createElement('br'))
+
+    return details
+}
+
+function enchantments(arr) {
+    let enchantments = 'enchantments={'
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i][0] !== '')
+            enchantments += `${arr[i][0]}:${(arr[i][1] !== '' ? arr[i][1] : 1)},`
+    }
+    enchantments = enchantments.replace(/,$/, '}')
+    if (enchantments === 'enchantments={')
+        return ''
+    return enchantments
 }
 
 function build_equippable() {
@@ -768,8 +825,6 @@ function repair_cost(arr) {
 function build_suspicious_stew_effects() {
     let details = addComponent('suspicious_stew_effects', ['id', 'text', 'duration', 'number'])
 
-    let wrapper = document.createElement('span')
-
     let pBtn = document.createElement('button')
     pBtn.innerText = '+'
     pBtn.addEventListener('click', function () {
@@ -804,6 +859,55 @@ function build_suspicious_stew_effects() {
     details.appendChild(document.createElement('br'))
 
     return details
+}
+
+function build_stored_enchantments() {
+    let details = addComponent('stored_enchantments', [])
+
+    details.appendChild(document.createElement('br'))
+
+    let pBtn = document.createElement('button')
+    pBtn.innerText = '+'
+    pBtn.addEventListener('click', function () {
+        let wrapper = document.createElement('span')
+        let enchantmentText = document.createElement('span')
+        enchantmentText.innerText = 'enchantment: '
+        wrapper.appendChild(enchantmentText)
+        let enchantment = document.createElement('input')
+        wrapper.appendChild(enchantment)
+        wrapper.appendChild(document.createElement('br'))
+
+        let levelText = document.createElement('span')
+        levelText.innerText = 'level: '
+        wrapper.appendChild(levelText)
+        let level = document.createElement('input')
+        level.type = 'number'
+        level.min = 1
+        level.max = 255
+        wrapper.appendChild(level)
+        wrapper.appendChild(document.createElement('br'))
+
+        details.appendChild(wrapper)
+    })
+    pBtn.click()
+
+    let mBtn = document.createElement('button')
+    mBtn.innerText = '-'
+    mBtn.addEventListener('click', function () {
+        if (document.querySelectorAll('#stored_enchantments > span').length !== 1)
+            document.querySelector('#stored_enchantments > span:last-child').remove()
+    })
+
+    details.appendChild(pBtn) // TODO: Move to better spot
+    details.appendChild(mBtn)
+    details.appendChild(document.createElement('br'))
+
+    return details
+}
+
+function stored_enchantments(arr) {
+    // enchantments and stored_enchantments are the same
+    return enchantments(arr).replace('enchantments', 'stored_enchantments')
 }
 
 function suspicious_stew_effects(arr) {
