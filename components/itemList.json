@@ -8,7 +8,7 @@
         "cooked_porkchop", "cooked_rabbit", "cooked_salmon", "cookie", "copper_ingot", "cow_spawn_egg", "creeper_charge_banner_pattern", "creeper_spawn_egg", "crossbow", "cyan_dye", "danger_pottery_sherd", "dark_oak_boat", "dark_oak_chest_boat", "debug_stick", "diamond", "diamond_axe",
         "diamond_boots", "diamond_chestplate", "diamond_helmet", "diamond_hoe", "diamond_horse_armor", "diamond_leggings", "diamond_pickaxe", "diamond_shovel", "diamond_sword", "disc_fragment", "dolphin_spawn_egg", "donkey_spawn_egg", "dragon_breath", "dried_kelp", "drowned_spawn_egg", "dune_armor_trim",
         "echo_shard", "egg", "elder_guardian_spawn_egg", "elytra", "emerald", "empty_map", "enchanted_book", "enchanted_golden_apple", "enderman_spawn_egg", "endermite_spawn_egg", "ender_dragon_spawn_egg", "ender_pearl", "end_crystal", "evoker_spawn_egg", "experience_bottle", "explorer_pottery_sherd",
-        "eye_armor_trim", "ender_eye", "feather", "fermented_spider_eye", "field_masoned_banner_pattern", "firework_rocket", "firework_star", "fire_charge", "fishing_rod", "flint", "flint_and_steel", "flower_charge_banner_pattern", "flow_armor_trim", "flow_banner_pattern", "flow_pottery_sherd", "fox_spawn_egg",
+        "eye_armor_trim", "ender_eye", "feather", "fermented_spider_eye", "field_masoned_banner_pattern", "firework_rocket", "fire_charge", "fishing_rod", "flint", "flint_and_steel", "flower_charge_banner_pattern", "flow_armor_trim", "flow_banner_pattern", "flow_pottery_sherd", "fox_spawn_egg",
         "friend_pottery_sherd", "frog_spawn_egg", "furnace_minecart", "ghast_spawn_egg", "ghast_tear", "glass_bottle", "glistering_melon_slice", "globe_banner_pattern", "glowstone_dust", "glow_berries", "glow_ink_sac", "glow_item_frame", "glow_squid_spawn_egg", "goat_horn", "goat_spawn_egg", "golden_apple",
         "golden_axe", "golden_boots", "golden_carrot", "golden_chestplate", "golden_helmet", "golden_hoe", "golden_horse_armor", "golden_leggings", "golden_pickaxe", "golden_shovel", "golden_sword", "gold_ingot", "gold_nugget", "gray_dye", "green_dye", "guardian_spawn_egg",
         "gunpowder", "guster_banner_pattern", "guster_pottery_sherd", "heartbreak_pottery_sherd", "heart_of_the_sea", "heart_pottery_sherd", "hoglin_spawn_egg", "honeycomb", "honey_bottle", "hopper_minecart", "horse_spawn_egg", "host_armor_trim", "howl_pottery_sherd", "husk_spawn_egg", "ink_sac", "iron_axe",
@@ -100,6 +100,11 @@
         "custom": [
             "map_color",
             "map_id"
+        ]
+    },
+    "firework_star": {
+        "custom": [
+            "firework_explosion"
         ]
     },
     "knowledge_book": {

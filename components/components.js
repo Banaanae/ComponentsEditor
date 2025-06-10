@@ -323,6 +323,65 @@ function equippable(arr) {
     return equippable.replace(/,$/, '}')
 }
 
+function build_firework_explosion() {
+    let details = addComponent('firework_explosion', ['shape', 'none', 'colors', 'none', 'fade_colors', 'none', 'has_trail', 'checkbox', 'has_twinkle', 'checkbox'])
+
+    let shape = buildSelect(['small_ball', 'large_ball', 'star', 'creeper', 'burst'])
+    details.children[8].appendChild(shape)
+
+    let colorWrapper = document.createElement('span')
+    let pBtn1 = document.createElement('button')
+    pBtn1.innerText = '+'
+    pBtn1.addEventListener('click', function () {
+        let color = document.createElement('input')
+        color.type = 'color'
+        colorWrapper.appendChild(color)
+    })
+    pBtn1.click()
+    let mBtn1 = document.createElement('button')
+    mBtn1.innerText = '-'
+    mBtn1.addEventListener('click', function () {
+        if (document.querySelectorAll('#firework_explosion > span:nth-child(11) input').length !== 1)
+            document.querySelector('#firework_explosion > span:nth-child(11) input:last-child').remove()
+    })
+    details.children[10].appendChild(colorWrapper)
+    details.children[10].appendChild(pBtn1)
+    details.children[10].appendChild(mBtn1)
+
+    let fadeWrapper = document.createElement('span')
+    let pBtn2 = document.createElement('button')
+    pBtn2.innerText = '+'
+    pBtn2.addEventListener('click', function () {
+        let fade = document.createElement('input')
+        fade.type = 'color'
+        fadeWrapper.appendChild(fade)
+    })
+    pBtn2.click()
+    let mBtn2 = document.createElement('button')
+    mBtn2.innerText = '-'
+    mBtn2.addEventListener('click', function () {
+        if (document.querySelectorAll('#firework_explosion > span:nth-child(13) input').length !== 1)
+            document.querySelector('#firework_explosion > span:nth-child(13) input:last-child').remove()
+    })
+    details.children[12].appendChild(fadeWrapper)
+    details.children[12].appendChild(pBtn2)
+    details.children[12].appendChild(mBtn2)
+
+    return details
+}
+
+function firework_explosion(arr) {
+    let firework_explosion = `firework_explosion={shape:${arr[0]},`
+
+    // TODO: What are the defaults
+    firework_explosion += generateList('colors:[', arr[1], false, false)
+    firework_explosion += generateList('fase_colors:[', arr[2], false, false)
+    firework_explosion += `has_trail:${arr[3]},`
+    firework_explosion += `has_twinkle:${arr[4]}`
+
+    return firework_explosion + '}'
+}
+
 function build_food() {
     let span = addComponent('food', ['nutrition', 'number', 'saturation', 'number', 'can_always_eat', 'checkbox'])
 
