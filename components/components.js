@@ -3,8 +3,8 @@
  * And generating its part of the command
  */
 
-// TODO: Move lock to containers
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'enchantments', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'stored_enchantments', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+// TODO: Move lock, container_loot to containers
+const universal = ['blocks_attacks', 'break_sound', 'consumable', 'container_loot', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'enchantments', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'stored_enchantments', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -123,6 +123,23 @@ function consumable(arr) {
         component += consumeFX
 
     return component.replace(/,$/, '}')
+}
+
+function build_container_loot() {
+    let details = addComponent('container_loot', ['loot_table', 'text', 'seed', 'number'])
+
+    return details
+}
+
+function container_loot(arr) {
+    let container_loot = `container_loot={loot_table:"${arr[0]}"`
+
+    if (arr[0] === '')
+        return ''
+    if (arr[1] !== '' && arr[1] !== '0')
+        container_loot += ',seed:' + arr[1]
+
+    return container_loot + '}'
 }
 
 function build_custom_name() {
