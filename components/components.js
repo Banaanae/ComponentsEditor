@@ -89,6 +89,25 @@ function break_sound(arr) {
     return `break_sound="${arr[0]}"`
 }
 
+function build_charged_projectiles() {
+    let details = addComponent('charged_projectiles', [])
+
+    details.innerHTML += buildItemComponents(false)
+
+    return details
+}
+
+function charged_projectiles(arr) {
+    let use_remainder = `charged_projectiles={id:"${arr[0]}",`
+
+    if (arr[1] !== '1' && arr[1] !== '')
+        use_remainder += `count:${arr[1]},`
+
+    use_remainder += generateComponents(arr[2])
+
+    return use_remainder.replace(/,$/, '') + '}'
+}
+
 function build_consumable() {
     let span = addComponent('consumable', ['consume_seconds', 'number', 'animation', 'none', 'sound', 'text', 'has_consume_particles', 'checkbox', 'on_consume_effects', 'none'])
 
