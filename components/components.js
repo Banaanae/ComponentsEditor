@@ -22,8 +22,10 @@ function build_blocks_attacks() {
         'item_damage', 'header', 'threshold', 'number', 'base', 'number', 'factor', 'number',
         'block_sound', 'text', 'disabled_sound', 'text', 'bypassed_by', 'text'])
 
-    // TODO: Type +/- and for headers
-    //       Float 0.1 steps, mins and maxes
+    details.querySelectorAll('input[type="number"]').forEach((input) => {
+        input.step = 0.1
+    })
+
     return details
 }
 
