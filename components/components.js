@@ -4,7 +4,7 @@
  */
 
 // TODO: Move lock, container_loot to containers
-const universal = ['blocks_attacks', 'break_sound', 'consumable', 'container_loot', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'enchantments', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'stored_enchantments', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'bucket_entity_data', 'consumable', 'container_loot', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'enchantments', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'stored_enchantments', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -97,6 +97,56 @@ function build_charged_projectiles() {
     details.innerHTML += buildItemComponents(false)
 
     return details
+}
+
+function build_bucket_entity_data() {
+    let details = addComponent('bucket_entity_data', ['NoAI', 'checkbox', 'Silent', 'checkbox', 'NoGravity', 'checkbox', ' Glowing', 'checkbox', 'Invulnerable', 'checkbox', 'Health', 'number', 'Age', 'number', 'Variant', 'Number', 'HuntingCooldown', 'number', 'BucketVariantTag', 'number', 'type', 'none'])
+
+    details.appendChild(buildSelect(['randomised', 'small', 'medium', 'large'], false))
+
+    details.children[24].step = 0.1
+
+    return details
+}
+
+function bucket_entity_data(arr) {
+    let bucket_entity_data = 'bucket_entity_data={'
+
+    if (arr[0] !== 'false')
+        bucket_entity_data += 'noai:true,'
+
+    if (arr[1] !== 'false')
+        bucket_entity_data += 'silent:true,'
+
+    if (arr[2] !== 'false')
+        bucket_entity_data += 'nogravity:true,'
+
+    if (arr[3] !== 'false')
+        bucket_entity_data += 'glowing:true,'
+
+    if (arr[4] !== 'false')
+        bucket_entity_data += 'invulnerable:true,'
+
+    if (arr[5] !== '')
+        bucket_entity_data += `health:${arr[5]},`
+
+    if (arr[6] !== '')
+        bucket_entity_data += `age:${arr[6]},`
+
+    // TODO: Omit if component doesn't match the item
+    if (arr[7] !== '')
+        bucket_entity_data += `variant:${arr[7]},`
+
+    if (arr[8] !== '')
+        bucket_entity_data += `huntingcooldown:${arr[8]},`
+
+    if (arr[9] !== '')
+        bucket_entity_data += `bucketvarianttag:${arr[9]},`
+
+    if (arr[10] !== 'randomised')
+        bucket_entity_data += `type:${arr[10]},`
+
+    return bucket_entity_data.replace(/,$/, '}')
 }
 
 function charged_projectiles(arr) {
