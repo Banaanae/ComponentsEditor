@@ -4,7 +4,7 @@
  */
 
 // TODO: Move lock, container_loot to containers
-const universal = ['blocks_attacks', 'break_sound', 'bucket_entity_data', 'consumable', 'container_loot', 'custom_name', 'damage', 'death_protection', 'enchantment_glint_override', 'enchantments', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'stored_enchantments', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
+const universal = ['blocks_attacks', 'break_sound', 'bucket_entity_data', 'consumable', 'container_loot', 'custom_name', 'damage', 'damage_resistant', 'death_protection', 'enchantment_glint_override', 'enchantments', 'equippable', 'food', 'glider', 'intangible_projectile', 'item_model', 'item_name', 'jukebox_playable', 'lock', 'lore', 'max_damage', 'max_stack_size', 'provides_banner_patterns', 'rarity', 'repairable', 'repair_cost', 'stored_enchantments', 'tool', 'unbreakable', 'use_cooldown', 'use_remainder', 'weapon'];
 
 function build_base_color() {
     let details = addComponent('base_color', ['base_color', 'text'])
@@ -241,6 +241,18 @@ function build_damage() {
 
 function damage(arr) {
     return `damage=${arr[0]}`
+}
+
+function build_damage_resistant() {
+    let details = addComponent('damage_resistant', ['types', 'text'])
+
+    return details
+}
+
+function damage_resistant(arr) {
+    if (arr[0] !== '')
+        return `damage_resistant={type:"${arr[0]}"}`
+    return ''
 }
 
 function build_death_protection() {
