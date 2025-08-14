@@ -168,7 +168,7 @@ function build_consumable() {
     let animation = buildSelect(['none', 'eat', 'drink', 'block', 'bow', 'spear', 'crossbow', 'spyglass', 'toot_horn', 'brush'])
     span.children[11].appendChild(animation)
 
-    span.append(buildConsumeEffects())
+    span.append(buildConsumeEffects('consumable'))
 
     return span
 }
@@ -256,15 +256,21 @@ function damage_resistant(arr) {
 }
 
 function build_death_protection() {
-    let details = addComponent('death_protection', [])
+    let details = addComponent('death_protection', ['death_effects', 'none'])
 
-    // TODO: consume_effects
+    details.append(buildConsumeEffects('death_protection'))
 
     return details
 }
 
 function death_protection(arr) {
-    return 'death_protection={}'
+    let death_protection = 'death_protection={'
+
+    let consumeFX = generateConsumeEffects(arr[0])
+    if (consumeFX !== '')
+        death_protection += consumeFX
+
+    return death_protection.replace(/,$/, '}')
 }
 
 function build_dyed_color() {

@@ -170,8 +170,9 @@ function generateComponents(command) {
     return components
 }
 
-function buildConsumeEffects() {
+function buildConsumeEffects(spanid) {
     let span = document.createElement('span')
+    span.classList.add('consumeEffects')
 
     let on_consume_effects = buildSelect(['apply_effects', 'remove_effects', 'clear_all_effects', 'teleport_randomly', 'play_sound'], true)
     span.appendChild(on_consume_effects)
@@ -185,6 +186,83 @@ function buildConsumeEffects() {
     span.appendChild(apply_effects)
     span.appendChild(document.createElement('br'))
 
+    function addNewEffect() {
+        let wrapper2 = document.createElement('span')
+        let effectWrapper = document.createElement('span')
+        effectWrapper.appendChild(document.createElement('br'))
+        let id_header = document.createElement('span')
+        id_header.innerText = 'id: '
+        effectWrapper.appendChild(id_header)
+        let id = document.createElement('input')
+        effectWrapper.appendChild(id)
+        effectWrapper.appendChild(document.createElement('br'))
+        let amplifier_header = document.createElement('span')
+        amplifier_header.innerText = 'amplifier: '
+        effectWrapper.appendChild(amplifier_header)
+        let amplifier = document.createElement('input')
+        amplifier.type = 'number'
+        effectWrapper.appendChild(amplifier)
+        effectWrapper.appendChild(document.createElement('br'))
+        let duration_header = document.createElement('span')
+        duration_header.innerText = 'duration: '
+        effectWrapper.appendChild(duration_header)
+        let duration = document.createElement('input')
+        duration.type = 'number'
+        duration.min = -1
+        effectWrapper.appendChild(duration)
+        effectWrapper.appendChild(document.createElement('br'))
+        let ambient_header = document.createElement('span')
+        ambient_header.innerText = 'ambient: '
+        effectWrapper.appendChild(ambient_header)
+        let ambient = document.createElement('input')
+        ambient.type = 'checkbox'
+        effectWrapper.appendChild(ambient)
+        effectWrapper.appendChild(document.createElement('br'))
+        let show_particles_header = document.createElement('span')
+        show_particles_header.innerText = 'show_particles: '
+        effectWrapper.appendChild(show_particles_header)
+        let show_particles = document.createElement('input')
+        show_particles.type = 'checkbox'
+        effectWrapper.appendChild(show_particles)
+        effectWrapper.appendChild(document.createElement('br'))
+        let show_icon_header = document.createElement('span')
+        show_icon_header.innerText = 'show_icon: '
+        effectWrapper.appendChild(show_icon_header)
+        let show_icon = document.createElement('input')
+        show_icon.type = 'checkbox'
+        effectWrapper.appendChild(show_icon)
+        wrapper2.appendChild(effectWrapper)
+        return wrapper2
+    }
+
+    let pBtn1 = document.createElement('button')
+    pBtn1.innerText = '+'
+    pBtn1.addEventListener('click', function () {
+        apply_effects.appendChild(addNewEffect())
+    })
+    apply_effects.appendChild(addNewEffect())
+    apply_effects.appendChild(pBtn1)
+
+    let mBtn1 = document.createElement('button')
+    mBtn1.innerText = '-'
+    mBtn1.addEventListener('click', function () {
+        if (document.querySelector(`#${spanid} > span.consumeEffects > span:nth-child(3) > span:last-child`).length !== 0)
+            document.querySelector(`#${spanid} > span.consumeEffects > span:nth-child(3) > span:last-child`).remove()
+    })
+    
+    apply_effects.appendChild(mBtn1)
+
+    apply_effects.appendChild(document.createElement('br'))
+    let probability_header = document.createElement('span')
+    probability_header.innerText = 'probability'
+    apply_effects.appendChild(probability_header)
+    let probability = document.createElement('input')
+    probability.type = 'number'
+    probability.step = 0.1
+    probability.min = 0
+    probability.max = 1
+    apply_effects.appendChild(probability)
+
     let remove_effects = document.createElement('span')
     remove_effects.style.display = 'none'
     let remove_effects_header = document.createElement('span')
@@ -197,23 +275,23 @@ function buildConsumeEffects() {
     firstEffect.type = 'text'
     wrapper.appendChild(firstEffect)
 
-    let pBtn = document.createElement('button')
-    pBtn.innerText = '+'
-    pBtn.addEventListener('click', function () {
+    let pBtn2 = document.createElement('button')
+    pBtn2.innerText = '+'
+    pBtn2.addEventListener('click', function () {
         let input = document.createElement('input')
         wrapper.appendChild(input)
     })
 
-    let mBtn = document.createElement('button')
-    mBtn.innerText = '-'
-    mBtn.addEventListener('click', function () {
-        if (document.querySelectorAll('#consumable > span:nth-child(9) > span > input:last-child').length !== 1)
-            document.querySelector('#consumable > span:nth-child(9) > span > input:last-child').remove()
+    let mBtn2 = document.createElement('button')
+    mBtn2.innerText = '-'
+    mBtn2.addEventListener('click', function () {
+        if (document.querySelectorAll(`#${spanid} > span.consumeEffects > span:nth-child(5) input`).length !== 1)
+            document.querySelector(`#${spanid} > span.consumeEffects > span:nth-child(5) input:last-child`).remove()
     })
 
     remove_effects.appendChild(wrapper)
-    remove_effects.appendChild(pBtn)
-    remove_effects.appendChild(mBtn)
+    remove_effects.appendChild(pBtn2)
+    remove_effects.appendChild(mBtn2)
     span.appendChild(remove_effects)
     span.appendChild(document.createElement('br'))
 
@@ -247,7 +325,7 @@ function buildConsumeEffects() {
 
     on_consume_effects.addEventListener('change', function () {
         for (let i = 0; i < 5; i++) {
-            document.querySelector('#consumable > span:nth-of-type(6) > span:nth-of-type(' + (i + 1) + ')').style.display = (on_consume_effects[i].selected ? 'inline' : 'none')
+            document.querySelector(`#${spanid} > span.consumeEffects > span:nth-of-type(${i + 1})`).style.display = (on_consume_effects[i].selected ? 'inline' : 'none')
         }
     })
 
@@ -258,11 +336,39 @@ function generateConsumeEffects(arr) {
     let consumeFX = 'on_consume_effects:['
 
     if (arr[0].apply_effects) {
-        // TODO
+        let effects = '{type:"apply_effects",effects:['
+        let probability = arr[1].splice(1,1)[0]
+        arr[1].forEach((effect) => {
+            let element = '{'
+            if (effect[0] != '') {
+                element += `id:"${effect[0]}",`
+
+                if (effect[1] !== '0')
+                    element += `amplifier:${effect[1]},`
+
+                let duration = Number(effect[2])
+                if (duration !== 0 && duration > -2)
+                    element += `duration:${effect[2]},`
+
+                if (effect[3] !== "false")
+                    element += 'ambient:true,'
+
+                if (effect[4] !== "true")
+                    element += 'show_particles:false,'
+
+                if (effect[5] !== "true")
+                    element += 'show_icon:false,'
+                effects += element.replace(/,$/, '},')
+            }
+        })
+        consumeFX += effects.replace(/,$/, '],')
+        if (probability !== '' && Number(probability) !== 1)
+            consumeFX += `probability:${probability},`
+        consumeFX = consumeFX.replace(/,$/, '},')
     }
 
     if (arr[0].remove_effects) {
-        let remove_effects = generateList('{type:"remove_effects",remove:[', arr[arr.length - 3], true, true)
+        let remove_effects = generateList('{type:"remove_effects",effects:[', arr[arr.length - 3], true, true).replace(/,$/, '')
         if (remove_effects !== '')
             remove_effects += "},"
         consumeFX += remove_effects
@@ -283,7 +389,7 @@ function generateConsumeEffects(arr) {
     if (consumeFX === 'on_consume_effects:[')
         return ''
 
-    return consumeFX
+    return consumeFX.replace(/,$/, '],')
 }
 
 // End builder funcs
